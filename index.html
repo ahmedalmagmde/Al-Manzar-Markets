@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,130 +19,104 @@
     }
     .pulse-btn { animation: pulse-green 2s infinite; }
   </style>
+<base target="_blank">
 </head>
-<body class="min-h-screen bg-gradient-to-b from-emerald-50 via-green-50 to-emerald-100 flex items-center justify-center p-4 relative">
+<body class="min-h-screen bg-gradient-to-b from-emerald-50 via-green-50 to-emerald-100 flex items-center justify-center p-4">
 
-  <!-- Language Switcher - Top Right Corner -->
-  <button onclick="toggleLang()" id="lang-btn" class="fixed top-4 right-4 z-50 bg-white/90 backdrop-blur border border-emerald-200 text-emerald-700 px-4 py-2 rounded-full font-bold shadow-md hover:shadow-lg transition-all hover:scale-105 text-sm">
-    <span id="lang-text">English</span>
+  <!-- Language Switcher -->
+  <button onclick="showLang('en')" id="switch-en" 
+    class="fixed top-4 right-4 z-50 bg-white border border-emerald-200 text-emerald-700 px-4 py-2 rounded-full font-bold shadow-md hover:shadow-lg transition-all hover:scale-105 text-sm cursor-pointer">
+    English
+  </button>
+  <button onclick="showLang('ar')" id="switch-ar" 
+    class="fixed top-4 right-4 z-50 bg-white border border-emerald-200 text-emerald-700 px-4 py-2 rounded-full font-bold shadow-md hover:shadow-lg transition-all hover:scale-105 text-sm cursor-pointer hidden">
+    العربية
   </button>
 
-  <div class="max-w-md w-full text-center pt-8">
+  <!-- Arabic Page -->
+  <div id="page-ar" class="max-w-md w-full text-center pt-10" dir="rtl">
+    <div class="float-anim inline-flex items-center justify-center w-24 h-24 rounded-3xl bg-emerald-600 text-white text-5xl mb-6 shadow-2xl">🛒</div>
+    <h1 class="text-5xl font-extrabold text-emerald-900 mb-3">أسواق المنظر</h1>
+    <p class="text-emerald-600 text-lg mb-10">كل احتياجاتك اليومية في مكان واحد</p>
 
-    <!-- Logo / Icon -->
-    <div class="float-anim inline-flex items-center justify-center w-24 h-24 rounded-3xl bg-emerald-600 text-white text-5xl mb-6 shadow-2xl">
-      🛒
-    </div>
-
-    <!-- Store Name -->
-    <h1 class="text-5xl font-extrabold text-emerald-900 mb-3 tracking-tight" id="store-name">أسواق المنظر</h1>
-    <p class="text-emerald-600 text-lg mb-10" id="tagline">كل احتياجاتك اليومية في مكان واحد</p>
-
-    <!-- Location Card -->
-    <div class="bg-white rounded-2xl shadow-lg border border-emerald-100 p-5 mb-6 text-right" id="location-card">
+    <div class="bg-white rounded-2xl shadow-lg border border-emerald-100 p-5 mb-6 text-right">
       <div class="flex items-center gap-3 mb-3">
-        <div class="w-10 h-10 rounded-full bg-red-50 flex items-center justify-center text-xl shrink-0">
-          📍
-        </div>
-        <div>
-          <h3 class="font-bold text-emerald-900" id="loc-title">موقع المحل</h3>
-          <p class="text-gray-400 text-xs" id="loc-sub">تقدر تزورنا على الخريطة</p>
+        <div class="w-10 h-10 rounded-full bg-red-50 flex items-center justify-center text-xl shrink-0">📍</div>
+        <div class="flex-1">
+          <h3 class="font-bold text-emerald-900 text-lg">موقع المحل</h3>
+          <p class="text-gray-400 text-sm">تقدر تزورنا على الخريطة</p>
         </div>
       </div>
-      <a href="https://maps.app.goo.gl/TYAYNCC6JaU3nHkMA" target="_blank" class="block w-full bg-gray-50 hover:bg-gray-100 text-emerald-700 text-center py-3 rounded-xl font-bold transition-all border border-gray-200" id="loc-btn">
+      <a href="https://maps.app.goo.gl/TYAYNCC6JaU3nHkMA" target="_blank" class="block w-full bg-gray-50 hover:bg-gray-100 text-emerald-700 text-center py-3 rounded-xl font-bold transition-all border border-gray-200">
         🗺️ افتح الموقع على Google Maps
       </a>
     </div>
 
-    <!-- WhatsApp Card -->
     <div class="bg-white rounded-2xl shadow-lg border border-emerald-100 p-5 mb-8">
       <div class="flex items-center gap-3 mb-4">
-        <div class="w-10 h-10 rounded-full bg-green-50 flex items-center justify-center text-xl shrink-0">
-          📱
-        </div>
-        <div class="text-right">
-          <h3 class="font-bold text-emerald-900" id="contact-title">رقم التواصل</h3>
+        <div class="w-10 h-10 rounded-full bg-green-50 flex items-center justify-center text-xl shrink-0">📱</div>
+        <div class="flex-1 text-right">
+          <h3 class="font-bold text-emerald-900 text-lg">رقم التواصل</h3>
           <p class="text-gray-500 text-sm">050 308 0315</p>
         </div>
       </div>
-
-      <a href="https://wa.me/966503080315?text=👋%20مرحباً%20أسواق%20المنظر%0A🛒%20عندي%20طلب%20جديد%0A📍%20يرجى%20تأكيد%20العنوان%20والتوصيل" target="_blank" class="pulse-btn block w-full bg-emerald-600 hover:bg-emerald-700 text-white text-center py-4 rounded-xl font-extrabold text-lg shadow-xl transition-all hover:scale-105 flex items-center justify-center gap-2" id="wa-btn">
-        <span class="text-2xl">💬</span>
-        <span id="wa-text">اطلب الآن عبر الواتساب</span>
+      <a href="https://wa.me/966503080315?text=%F0%9F%91%8B%20%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D8%A3%D8%B3%D9%88%D8%A7%D9%82%20%D8%A7%D9%84%D9%85%D9%86%D8%B8%D8%B1%0A%F0%9F%9B%92%20%D8%B9%D9%86%D8%AF%D9%8A%20%D8%B7%D9%84%D8%A8%20%D8%AC%D8%AF%D9%8A%D8%AF%0A%F0%9F%93%8D%20%D9%8A%D8%B1%D8%AC%D9%89%20%D8%AA%D8%A3%D9%83%D9%8A%D8%AF%20%D8%A7%D9%84%D8%B9%D9%86%D9%88%D8%A7%D9%86%20%D9%88%D8%A7%D9%84%D8%AA%D9%88%D8%B5%D9%8A%D9%84" target="_blank" class="pulse-btn block w-full bg-emerald-600 hover:bg-emerald-700 text-white text-center py-4 rounded-xl font-extrabold text-lg shadow-xl transition-all hover:scale-105">
+        💬 اطلب الآن عبر الواتساب
       </a>
-      <p class="text-gray-400 text-xs mt-3" id="wa-hint">اضغط وافتح تطبيق الواتساب مباشرة</p>
+      <p class="text-gray-400 text-sm mt-3">اضغط وافتح تطبيق الواتساب مباشرة</p>
     </div>
 
-    <!-- Footer -->
-    <p class="text-emerald-700/50 text-sm" id="footer">© 2026 أسواق المنظر</p>
+    <p class="text-emerald-700/50 text-sm">© 2026 أسواق المنظر</p>
+  </div>
+
+  <!-- English Page -->
+  <div id="page-en" class="max-w-md w-full text-center pt-10 hidden" dir="ltr">
+    <div class="float-anim inline-flex items-center justify-center w-24 h-24 rounded-3xl bg-emerald-600 text-white text-5xl mb-6 shadow-2xl">🛒</div>
+    <h1 class="text-5xl font-extrabold text-emerald-900 mb-3">Al Manzar Markets</h1>
+    <p class="text-emerald-600 text-lg mb-10">All your daily needs in one place</p>
+
+    <div class="bg-white rounded-2xl shadow-lg border border-emerald-100 p-5 mb-6 text-left">
+      <div class="flex items-center gap-3 mb-3">
+        <div class="w-10 h-10 rounded-full bg-red-50 flex items-center justify-center text-xl shrink-0">📍</div>
+        <div class="flex-1">
+          <h3 class="font-bold text-emerald-900 text-lg">Our Location</h3>
+          <p class="text-gray-400 text-sm">Visit us on the map</p>
+        </div>
+      </div>
+      <a href="https://maps.app.goo.gl/TYAYNCC6JaU3nHkMA" target="_blank" class="block w-full bg-gray-50 hover:bg-gray-100 text-emerald-700 text-center py-3 rounded-xl font-bold transition-all border border-gray-200">
+        🗺️ Open on Google Maps
+      </a>
+    </div>
+
+    <div class="bg-white rounded-2xl shadow-lg border border-emerald-100 p-5 mb-8">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10 rounded-full bg-green-50 flex items-center justify-center text-xl shrink-0">📱</div>
+        <div class="flex-1 text-left">
+          <h3 class="font-bold text-emerald-900 text-lg">Contact Number</h3>
+          <p class="text-gray-500 text-sm">050 308 0315</p>
+        </div>
+      </div>
+      <a href="https://wa.me/966503080315?text=%F0%9F%91%8B%20Hello%20Al%20Manzar%20Markets%0A%F0%9F%9B%92%20I%20have%20a%20new%20order%0A%F0%9F%93%8D%20Please%20confirm%20address%20%26%20delivery" target="_blank" class="pulse-btn block w-full bg-emerald-600 hover:bg-emerald-700 text-white text-center py-4 rounded-xl font-extrabold text-lg shadow-xl transition-all hover:scale-105">
+        💬 Order Now via WhatsApp
+      </a>
+      <p class="text-gray-400 text-sm mt-3">Click to open WhatsApp directly</p>
+    </div>
+
+    <p class="text-emerald-700/50 text-sm">© 2026 Al Manzar Markets</p>
   </div>
 
   <script>
-    let currentLang = 'ar';
-
-    const translations = {
-      ar: {
-        langText: 'English',
-        storeName: 'أسواق المنظر',
-        tagline: 'كل احتياجاتك اليومية في مكان واحد',
-        locTitle: 'موقع المحل',
-        locSub: 'تقدر تزورنا على الخريطة',
-        locBtn: '🗺️ افتح الموقع على Google Maps',
-        contactTitle: 'رقم التواصل',
-        waText: 'اطلب الآن عبر الواتساب',
-        waHint: 'اضغط وافتح تطبيق الواتساب مباشرة',
-        footer: '© 2026 أسواق المنظر',
-        waMsg: '👋 مرحباً أسواق المنظر
-🛒 عندي طلب جديد
-📍 يرجى تأكيد العنوان والتوصيل',
-        dir: 'rtl'
-      },
-      en: {
-        langText: 'العربية',
-        storeName: 'Al Manzar Markets',
-        tagline: 'All your daily needs in one place',
-        locTitle: 'Our Location',
-        locSub: 'Visit us on the map',
-        locBtn: '🗺️ Open on Google Maps',
-        contactTitle: 'Contact Number',
-        waText: 'Order Now via WhatsApp',
-        waHint: 'Click to open WhatsApp directly',
-        footer: '© 2026 Al Manzar Markets',
-        waMsg: '👋 Hello Al Manzar Markets
-🛒 I have a new order
-📍 Please confirm address & delivery',
-        dir: 'ltr'
-      }
-    };
-
-    function toggleLang() {
-      currentLang = currentLang === 'ar' ? 'en' : 'ar';
-      const t = translations[currentLang];
-
-      document.documentElement.lang = currentLang;
-      document.documentElement.dir = t.dir;
-
-      document.getElementById('lang-text').textContent = t.langText;
-      document.getElementById('store-name').textContent = t.storeName;
-      document.getElementById('tagline').textContent = t.tagline;
-      document.getElementById('loc-title').textContent = t.locTitle;
-      document.getElementById('loc-sub').textContent = t.locSub;
-      document.getElementById('loc-btn').textContent = t.locBtn;
-      document.getElementById('contact-title').textContent = t.contactTitle;
-      document.getElementById('wa-text').textContent = t.waText;
-      document.getElementById('wa-hint').textContent = t.waHint;
-      document.getElementById('footer').textContent = t.footer;
-
-      const waLink = document.getElementById('wa-btn');
-      waLink.href = `https://wa.me/966503080315?text=${encodeURIComponent(t.waMsg)}`;
-
-      const locCard = document.getElementById('location-card');
-      if (currentLang === 'en') {
-        locCard.classList.remove('text-right');
-        locCard.classList.add('text-left');
+    function showLang(lang) {
+      if (lang === 'ar') {
+        document.getElementById('page-ar').classList.remove('hidden');
+        document.getElementById('page-en').classList.add('hidden');
+        document.getElementById('switch-en').classList.remove('hidden');
+        document.getElementById('switch-ar').classList.add('hidden');
       } else {
-        locCard.classList.remove('text-left');
-        locCard.classList.add('text-right');
+        document.getElementById('page-ar').classList.add('hidden');
+        document.getElementById('page-en').classList.remove('hidden');
+        document.getElementById('switch-en').classList.add('hidden');
+        document.getElementById('switch-ar').classList.remove('hidden');
       }
     }
   </script>
