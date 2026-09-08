@@ -88,6 +88,13 @@
       box-shadow: 0 0 30px rgba(16, 185, 129, 0.5);
     }
     
+    /* حل مشكلة اتجاه الأرقام */
+    .number-ltr {
+      direction: ltr;
+      unicode-bidi: bidi-override;
+      display: inline-block;
+    }
+    
     /* Modal */
     .modal {
       display: none;
@@ -111,6 +118,68 @@
     .tab-content.active {
       display: block;
       animation: fadeInUp 0.4s ease;
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      nav { padding: 12px 16px !important; }
+      nav .max-w-6xl { padding: 0 !important; }
+      
+      .pt-32 { padding-top: 100px !important; }
+      .pb-20 { padding-bottom: 20px !important; }
+      .px-4 { padding-left: 16px !important; padding-right: 16px !important; }
+      
+      h1 { font-size: 2rem !important; line-height: 2.5rem !important; }
+      h2 { font-size: 1.875rem !important; }
+      h3 { font-size: 1.25rem !important; }
+      
+      .grid { gap: 16px !important; }
+      .gap-8 { gap: 16px !important; }
+      .gap-10 { gap: 16px !important; }
+      
+      .md\:grid-cols-2 { grid-template-columns: 1fr !important; }
+      .md\:grid-cols-3 { grid-template-columns: 1fr !important; }
+      .md\:grid-cols-4 { grid-template-columns: 1fr !important; }
+      
+      .text-5xl { font-size: 1.875rem !important; }
+      .text-4xl { font-size: 1.5rem !important; }
+      .text-3xl { font-size: 1.25rem !important; }
+      .text-2xl { font-size: 1.125rem !important; }
+      .text-xl { font-size: 1rem !important; }
+      
+      section { padding: 40px 0 !important; }
+      
+      .py-20 { padding-top: 40px !important; padding-bottom: 40px !important; }
+      .py-12 { padding-top: 24px !important; padding-bottom: 24px !important; }
+      
+      p { font-size: 0.95rem !important; }
+      
+      button { font-size: 0.95rem !important; padding: 12px 20px !important; }
+      
+      .mb-16 { margin-bottom: 24px !important; }
+      .mb-12 { margin-bottom: 20px !important; }
+      .mb-8 { margin-bottom: 16px !important; }
+      .mb-4 { margin-bottom: 12px !important; }
+      
+      .max-w-2xl { width: 100% !important; }
+    }
+
+    @media (max-width: 480px) {
+      nav .text-lg { font-size: 1rem !important; }
+      .text-5xl { font-size: 1.5rem !important; }
+      .text-4xl { font-size: 1.25rem !important; }
+      .text-3xl { font-size: 1rem !important; }
+      .text-2xl { font-size: 0.95rem !important; }
+      
+      h1 { font-size: 1.5rem !important; }
+      h2 { font-size: 1.25rem !important; }
+      
+      section { padding: 30px 0 !important; }
+      .px-4 { padding-left: 12px !important; padding-right: 12px !important; }
+      
+      button { width: 100% !important; }
+      
+      .float-subtle { width: 120px !important; height: 120px !important; font-size: 3rem !important; }
     }
   </style>
 <base target="_blank">
@@ -165,8 +234,8 @@
     <section class="py-20 px-4 bg-white/50">
       <div class="max-w-6xl mx-auto">
         <h2 class="text-4xl font-bold text-emerald-900 text-center mb-16">لماذا تختار أسواق المنظر؟</h2>
-        <div class="grid md:grid-cols-3 gap-8">
-          <div class="anim-fadeInUp stagger-1 p-8 rounded-2xl bg-gradient-to-br from-emerald-50 to-green-50 border border-emerald-200">
+        <div class="grid md:grid-cols-3 gap-6 md:gap-8">
+          <div class="anim-fadeInUp stagger-1 p-6 md:p-8 rounded-2xl bg-gradient-to-br from-emerald-50 to-green-50 border border-emerald-200">
             <div class="text-5xl mb-4">⚡</div>
             <h3 class="text-2xl font-bold text-emerald-900 mb-3">توصيل سريع</h3>
             <p class="text-gray-600">توصيل فوري في نفس اليوم لجميع طلباتك بكل أمان</p>
@@ -189,7 +258,7 @@
     <section class="py-20 px-4">
       <div class="max-w-6xl mx-auto">
         <h2 class="text-4xl font-bold text-emerald-900 text-center mb-16">منتجاتنا المتنوعة</h2>
-        <div class="grid md:grid-cols-4 gap-6">
+        <div class="grid md:grid-cols-4 gap-4 md:gap-6">
           <div class="anim-scaleIn stagger-1 product-card rounded-2xl bg-white p-6 border border-emerald-100 hover:shadow-xl cursor-pointer group">
             <div class="text-6xl mb-4 group-hover:scale-110 origin-bottom">🥬</div>
             <h3 class="font-bold text-emerald-900 text-lg mb-1">الخضراوات</h3>
@@ -233,10 +302,10 @@
     <section class="py-20 px-4">
       <div class="max-w-6xl mx-auto">
         <h2 class="text-4xl font-bold text-emerald-900 text-center mb-16">آراء عملائنا</h2>
-        <div class="grid md:grid-cols-3 gap-8">
+        <div class="grid md:grid-cols-3 gap-4 md:gap-8">
           <div class="anim-fadeInUp stagger-1 p-8 rounded-2xl bg-white border-l-4 border-emerald-500 hover:shadow-lg">
             <div class="flex items-center gap-1 mb-3">⭐⭐⭐⭐⭐</div>
-            <p class="text-gray-600 mb-4">"منتجات طازة وخدمة ممتازة جداً"</p>
+            <p class="text-gray-600 mb-4">"منتجات طازة وخدمة ممتازة جداً، أنا من أوفى الزبائن"</p>
             <p class="font-bold text-emerald-900">أم سارة</p>
           </div>
           <div class="anim-fadeInUp stagger-2 p-8 rounded-2xl bg-white border-l-4 border-emerald-500 hover:shadow-lg">
@@ -246,7 +315,7 @@
           </div>
           <div class="anim-fadeInUp stagger-3 p-8 rounded-2xl bg-white border-l-4 border-emerald-500 hover:shadow-lg">
             <div class="flex items-center gap-1 mb-3">⭐⭐⭐⭐⭐</div>
-            <p class="text-gray-600 mb-4">"افضل متجر "</p>
+            <p class="text-gray-600 mb-4">"افضل متجر"</p>
             <p class="font-bold text-emerald-900">أم محمود</p>
           </div>
         </div>
@@ -258,7 +327,7 @@
       <div class="max-w-2xl mx-auto">
         <h2 class="text-4xl font-bold text-white text-center mb-12">تواصل معنا</h2>
         
-        <div class="grid md:grid-cols-2 gap-6 mb-8">
+        <div class="grid md:grid-cols-2 gap-4 md:gap-6 mb-8">
           <!-- Map Card -->
           <div class="anim-fadeInUp stagger-1 bg-white rounded-2xl p-8">
             <div class="flex items-center gap-3 mb-4">
@@ -277,7 +346,7 @@
               <span class="text-3xl">📞</span>
               <h3 class="text-xl font-bold text-emerald-900">اتصل بنا</h3>
             </div>
-            <p class="text-gray-600 mb-2 text-lg font-bold">050 308 0315</p>
+            <p class="text-gray-600 mb-2 text-lg font-bold"><span class="number-ltr">050 308 0315</span></p>
             <p class="text-gray-500 text-sm mb-6">متاح 24/7</p>
             <a href="tel:0503080315" class="block w-full bg-emerald-600 hover:bg-emerald-700 text-white py-3 rounded-xl font-bold text-center transition-all hover:scale-105">
               ☎️ اتصل الآن
@@ -302,7 +371,7 @@
     <!-- Footer -->
     <footer class="bg-emerald-900 text-emerald-100 py-12 px-4">
       <div class="max-w-6xl mx-auto text-center">
-        <p class="mb-2">© 2027 أسواق المنظر | جميع الحقوق محفوظة</p>
+        <p class="mb-2">© 2026 أسواق المنظر | جميع الحقوق محفوظة</p>
         <p class="text-sm text-emerald-200">متجرك الموثوق للتسوق اليومي ✨</p>
       </div>
     </footer>
