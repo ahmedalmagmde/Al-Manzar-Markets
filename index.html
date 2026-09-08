@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>أسواق المنظر | Al Manzar Markets</title>
+  <title>أسواق المنظر</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap');
@@ -125,8 +125,7 @@
         <span class="font-bold text-emerald-900 text-lg">أسواق المنظر</span>
       </div>
       <div class="flex gap-3">
-        <button onclick="showLang('ar')" id="switch-ar" class="px-4 py-2 rounded-full text-sm font-bold bg-emerald-100 text-emerald-900 hover:bg-emerald-200 hidden">العربية</button>
-        <button onclick="showLang('en')" id="switch-en" class="px-4 py-2 rounded-full text-sm font-bold bg-emerald-100 text-emerald-900 hover:bg-emerald-200">English</button>
+        <!-- Language switcher removed -->
       </div>
     </div>
   </nav>
@@ -219,16 +218,12 @@
     <section class="py-20 px-4 bg-emerald-900 text-white">
       <div class="max-w-6xl mx-auto">
         <h2 class="text-4xl font-bold text-center mb-16">ساعات العمل</h2>
-        <div class="grid md:grid-cols-2 gap-8 max-w-2xl mx-auto">
-          <div class="anim-slideInRight stagger-1 text-center p-6 bg-emerald-800/50 rounded-xl">
-            <p class="text-lg font-bold mb-2">أيام العمل</p>
-            <p class="text-emerald-100">السبت - الخميس</p>
-            <p class="text-2xl font-bold text-emerald-300 mt-2">7:00 ص - 11:00 م</p>
-          </div>
-          <div class="anim-slideInRight stagger-2 text-center p-6 bg-emerald-800/50 rounded-xl">
-            <p class="text-lg font-bold mb-2">عطلة أسبوعية</p>
-            <p class="text-emerald-100">الجمعة</p>
-            <p class="text-2xl font-bold text-emerald-300 mt-2">مغلق</p>
+        <div class="max-w-2xl mx-auto">
+          <div class="anim-slideInRight stagger-1 text-center p-8 bg-emerald-800/50 rounded-xl">
+            <p class="text-lg font-bold mb-3">مفتوح طوال الأسبوع</p>
+            <p class="text-emerald-100 mb-3">السبت - الجمعة</p>
+            <p class="text-3xl font-bold text-emerald-300">6:30 ص - 12:30 ص</p>
+            <p class="text-sm text-emerald-200 mt-4">متاح كل يوم للخدمتك ✨</p>
           </div>
         </div>
       </div>
@@ -314,189 +309,6 @@
 
   </div>
 
-  <!-- English Version -->
-  <div id="page-en" class="hidden" dir="ltr">
-
-    <!-- Hero Section -->
-    <section class="pt-32 pb-20 px-4">
-      <div class="max-w-6xl mx-auto">
-        <div class="grid md:grid-cols-2 gap-10 items-center">
-          <div class="anim-fadeInUp">
-            <h1 class="text-5xl md:text-6xl font-extrabold mb-4 text-emerald-900 leading-tight">
-              All Your Daily
-              <span class="text-gradient"> Needs</span>
-              in One Place
-            </h1>
-            <p class="text-xl text-gray-600 mb-8 leading-relaxed">
-              Your trusted shopping destination • Fresh products • Fair prices • Fast service
-            </p>
-            <button onclick="document.getElementById('contact-en').scrollIntoView({behavior: 'smooth'})" class="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 rounded-xl font-bold text-lg glow transition-all hover:scale-105">
-              Order Now 🚀
-            </button>
-          </div>
-          <div class="anim-scaleIn">
-            <div class="text-center">
-              <div class="inline-flex items-center justify-center w-40 h-40 rounded-3xl bg-gradient-to-br from-emerald-400 to-emerald-600 text-white text-8xl float-subtle">
-                🛍️
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Features Section -->
-    <section class="py-20 px-4 bg-white/50">
-      <div class="max-w-6xl mx-auto">
-        <h2 class="text-4xl font-bold text-emerald-900 text-center mb-16">Why Choose Al Manzar?</h2>
-        <div class="grid md:grid-cols-3 gap-8">
-          <div class="anim-fadeInUp stagger-1 p-8 rounded-2xl bg-gradient-to-br from-emerald-50 to-green-50 border border-emerald-200">
-            <div class="text-5xl mb-4">⚡</div>
-            <h3 class="text-2xl font-bold text-emerald-900 mb-3">Fast Delivery</h3>
-            <p class="text-gray-600">Same-day delivery for all your orders with complete safety</p>
-          </div>
-          <div class="anim-fadeInUp stagger-2 p-8 rounded-2xl bg-gradient-to-br from-emerald-50 to-green-50 border border-emerald-200">
-            <div class="text-5xl mb-4">🌟</div>
-            <h3 class="text-2xl font-bold text-emerald-900 mb-3">Fresh Products</h3>
-            <p class="text-gray-600">We select the best fresh products directly from trusted sources</p>
-          </div>
-          <div class="anim-fadeInUp stagger-3 p-8 rounded-2xl bg-gradient-to-br from-emerald-50 to-green-50 border border-emerald-200">
-            <div class="text-5xl mb-4">💰</div>
-            <h3 class="text-2xl font-bold text-emerald-900 mb-3">Great Prices</h3>
-            <p class="text-gray-600">Best market prices with exclusive weekly offers</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Products Gallery -->
-    <section class="py-20 px-4">
-      <div class="max-w-6xl mx-auto">
-        <h2 class="text-4xl font-bold text-emerald-900 text-center mb-16">Our Products</h2>
-        <div class="grid md:grid-cols-4 gap-6">
-          <div class="anim-scaleIn stagger-1 product-card rounded-2xl bg-white p-6 border border-emerald-100 hover:shadow-xl cursor-pointer group">
-            <div class="text-6xl mb-4 group-hover:scale-110 origin-bottom">🥬</div>
-            <h3 class="font-bold text-emerald-900 text-lg mb-1">Vegetables</h3>
-            <p class="text-gray-500 text-sm">Fresh Daily</p>
-          </div>
-          <div class="anim-scaleIn stagger-2 product-card rounded-2xl bg-white p-6 border border-emerald-100 hover:shadow-xl cursor-pointer group">
-            <div class="text-6xl mb-4 group-hover:scale-110 origin-bottom">🍎</div>
-            <h3 class="font-bold text-emerald-900 text-lg mb-1">Fruits</h3>
-            <p class="text-gray-500 text-sm">Seasonal Fruits</p>
-          </div>
-          <div class="anim-scaleIn stagger-3 product-card rounded-2xl bg-white p-6 border border-emerald-100 hover:shadow-xl cursor-pointer group">
-            <div class="text-6xl mb-4 group-hover:scale-110 origin-bottom">🥛</div>
-            <h3 class="font-bold text-emerald-900 text-lg mb-1">Dairy</h3>
-            <p class="text-gray-500 text-sm">Healthy Products</p>
-          </div>
-          <div class="anim-scaleIn stagger-4 product-card rounded-2xl bg-white p-6 border border-emerald-100 hover:shadow-xl cursor-pointer group">
-            <div class="text-6xl mb-4 group-hover:scale-110 origin-bottom">🍞</div>
-            <h3 class="font-bold text-emerald-900 text-lg mb-1">Bakery</h3>
-            <p class="text-gray-500 text-sm">Fresh Every Day</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Opening Hours -->
-    <section class="py-20 px-4 bg-emerald-900 text-white">
-      <div class="max-w-6xl mx-auto">
-        <h2 class="text-4xl font-bold text-center mb-16">Opening Hours</h2>
-        <div class="grid md:grid-cols-2 gap-8 max-w-2xl mx-auto">
-          <div class="anim-slideInRight stagger-1 text-center p-6 bg-emerald-800/50 rounded-xl">
-            <p class="text-lg font-bold mb-2">Working Days</p>
-            <p class="text-emerald-100">Saturday - Thursday</p>
-            <p class="text-2xl font-bold text-emerald-300 mt-2">7:00 AM - 11:00 PM</p>
-          </div>
-          <div class="anim-slideInRight stagger-2 text-center p-6 bg-emerald-800/50 rounded-xl">
-            <p class="text-lg font-bold mb-2">Weekly Closure</p>
-            <p class="text-emerald-100">Friday</p>
-            <p class="text-2xl font-bold text-emerald-300 mt-2">Closed</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Reviews -->
-    <section class="py-20 px-4">
-      <div class="max-w-6xl mx-auto">
-        <h2 class="text-4xl font-bold text-emerald-900 text-center mb-16">What Our Customers Say</h2>
-        <div class="grid md:grid-cols-3 gap-8">
-          <div class="anim-fadeInUp stagger-1 p-8 rounded-2xl bg-white border-l-4 border-emerald-500 hover:shadow-lg">
-            <div class="flex items-center gap-1 mb-3">⭐⭐⭐⭐⭐</div>
-            <p class="text-gray-600 mb-4">"Fresh products and excellent service. I'm a loyal customer!"</p>
-            <p class="font-bold text-emerald-900">Fatima</p>
-          </div>
-          <div class="anim-fadeInUp stagger-2 p-8 rounded-2xl bg-white border-l-4 border-emerald-500 hover:shadow-lg">
-            <div class="flex items-center gap-1 mb-3">⭐⭐⭐⭐⭐</div>
-            <p class="text-gray-600 mb-4">"Amazing prices and super fast delivery. Highly recommended!"</p>
-            <p class="font-bold text-emerald-900">Mohammed</p>
-          </div>
-          <div class="anim-fadeInUp stagger-3 p-8 rounded-2xl bg-white border-l-4 border-emerald-500 hover:shadow-lg">
-            <div class="flex items-center gap-1 mb-3">⭐⭐⭐⭐⭐</div>
-            <p class="text-gray-600 mb-4">"Best market in town! Everyone is looking for them now."</p>
-            <p class="font-bold text-emerald-900">Sara</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact-en" class="py-20 px-4 bg-gradient-to-r from-emerald-600 to-emerald-700">
-      <div class="max-w-2xl mx-auto">
-        <h2 class="text-4xl font-bold text-white text-center mb-12">Contact Us</h2>
-        
-        <div class="grid md:grid-cols-2 gap-6 mb-8">
-          <!-- Map Card -->
-          <div class="anim-fadeInUp stagger-1 bg-white rounded-2xl p-8">
-            <div class="flex items-center gap-3 mb-4">
-              <span class="text-3xl">📍</span>
-              <h3 class="text-xl font-bold text-emerald-900">Location</h3>
-            </div>
-            <p class="text-gray-600 mb-6">Al Khayat District, Khamis Mushait</p>
-            <a href="https://maps.app.goo.gl/TYAYNCC6JaU3nHkMA" target="_blank" class="block w-full bg-emerald-600 hover:bg-emerald-700 text-white py-3 rounded-xl font-bold text-center transition-all hover:scale-105">
-              🗺️ View Map
-            </a>
-          </div>
-
-          <!-- Phone Card -->
-          <div class="anim-fadeInUp stagger-2 bg-white rounded-2xl p-8">
-            <div class="flex items-center gap-3 mb-4">
-              <span class="text-3xl">📞</span>
-              <h3 class="text-xl font-bold text-emerald-900">Call Us</h3>
-            </div>
-            <p class="text-gray-600 mb-2 text-lg font-bold">050 308 0315</p>
-            <p class="text-gray-500 text-sm mb-6">Available 24/7</p>
-            <a href="tel:0503080315" class="block w-full bg-emerald-600 hover:bg-emerald-700 text-white py-3 rounded-xl font-bold text-center transition-all hover:scale-105">
-              ☎️ Call Now
-            </a>
-          </div>
-        </div>
-
-        <!-- WhatsApp CTA -->
-        <div class="anim-fadeInUp stagger-3 bg-white rounded-2xl p-8">
-          <div class="flex items-center gap-3 mb-4">
-            <span class="text-3xl">💬</span>
-            <h3 class="text-xl font-bold text-emerald-900">Order on WhatsApp</h3>
-          </div>
-          <p class="text-gray-600 mb-6">Order your products now and we'll deliver quickly</p>
-          <a href="https://wa.me/966503080315?text=%F0%9F%91%8B%20Hello%20Al%20Manzar%20Markets%0A%F0%9F%9B%92%20I%20have%20a%20new%20order%0A%F0%9F%93%8D%20Please%20confirm%20address%20%26%20delivery" target="_blank" class="block w-full bg-green-500 hover:bg-green-600 text-white py-4 rounded-xl font-extrabold text-lg text-center transition-all hover:scale-105 glow">
-            💬 Open WhatsApp
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-emerald-900 text-emerald-100 py-12 px-4">
-      <div class="max-w-6xl mx-auto text-center">
-        <p class="mb-2">© 2026 Al Manzar Markets | All Rights Reserved</p>
-        <p class="text-sm text-emerald-200">Your trusted shopping destination ✨</p>
-      </div>
-    </footer>
-
-  </div>
-
   <script>
     // دالة تحويل الأرقام
     function convertNumbers(str, toArabic = true) {
@@ -513,11 +325,9 @@
       }
     }
 
-    // دالة لتحويل جميع الأرقام في الصفحة
-    function convertPageNumbers(isArabic) {
+    // تحويل الأرقام إلى عربي عند تحميل الصفحة
+    window.addEventListener('DOMContentLoaded', function() {
       const body = document.body;
-      
-      // تحويل جميع النصوص
       const walker = document.createTreeWalker(
         body,
         NodeFilter.SHOW_TEXT,
@@ -529,37 +339,14 @@
       const nodesToUpdate = [];
       
       while (node = walker.nextNode()) {
-        if (/\d|[\u0660-\u0669]/.test(node.textContent)) {
+        if (/\d/.test(node.textContent)) {
           nodesToUpdate.push(node);
         }
       }
       
       nodesToUpdate.forEach(node => {
-        node.textContent = convertNumbers(node.textContent, isArabic);
+        node.textContent = convertNumbers(node.textContent, true);
       });
-    }
-
-    function showLang(lang) {
-      if (lang === 'ar') {
-        document.getElementById('page-ar').classList.remove('hidden');
-        document.getElementById('page-en').classList.add('hidden');
-        document.getElementById('switch-en').classList.remove('hidden');
-        document.getElementById('switch-ar').classList.add('hidden');
-        document.documentElement.dir = 'rtl';
-        convertPageNumbers(true); // تحويل الأرقام إلى عربي
-      } else {
-        document.getElementById('page-ar').classList.add('hidden');
-        document.getElementById('page-en').classList.remove('hidden');
-        document.getElementById('switch-en').classList.add('hidden');
-        document.getElementById('switch-ar').classList.remove('hidden');
-        document.documentElement.dir = 'ltr';
-        convertPageNumbers(false); // تحويل الأرقام إلى إنجليزي
-      }
-    }
-
-    // تحويل الأرقام إلى عربي عند تحميل الصفحة
-    window.addEventListener('DOMContentLoaded', function() {
-      convertPageNumbers(true);
     });
 
     // Smooth scroll behavior
