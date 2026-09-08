@@ -498,6 +498,47 @@
   </div>
 
   <script>
+    // دالة تحويل الأرقام
+    function convertNumbers(str, toArabic = true) {
+      if (toArabic) {
+        // تحويل الأرقام من إنجليزية إلى عربية
+        return str.replace(/\d/g, function(digit) {
+          return String.fromCharCode(1632 + parseInt(digit));
+        });
+      } else {
+        // تحويل الأرقام من عربية إلى إنجليزية
+        return str.replace(/[\u0660-\u0669]/g, function(digit) {
+          return String.fromCharCode(48 + (digit.charCodeAt(0) - 1632));
+        });
+      }
+    }
+
+    // دالة لتحويل جميع الأرقام في الصفحة
+    function convertPageNumbers(isArabic) {
+      const body = document.body;
+      
+      // تحويل جميع النصوص
+      const walker = document.createTreeWalker(
+        body,
+        NodeFilter.SHOW_TEXT,
+        null,
+        false
+      );
+      
+      let node;
+      const nodesToUpdate = [];
+      
+      while (node = walker.nextNode()) {
+        if (/\d|[\u0660-\u0669]/.test(node.textContent)) {
+          nodesToUpdate.push(node);
+        }
+      }
+      
+      nodesToUpdate.forEach(node => {
+        node.textContent = convertNumbers(node.textContent, isArabic);
+      });
+    }
+
     function showLang(lang) {
       if (lang === 'ar') {
         document.getElementById('page-ar').classList.remove('hidden');
@@ -505,14 +546,21 @@
         document.getElementById('switch-en').classList.remove('hidden');
         document.getElementById('switch-ar').classList.add('hidden');
         document.documentElement.dir = 'rtl';
+        convertPageNumbers(true); // تحويل الأرقام إلى عربي
       } else {
         document.getElementById('page-ar').classList.add('hidden');
         document.getElementById('page-en').classList.remove('hidden');
         document.getElementById('switch-en').classList.add('hidden');
         document.getElementById('switch-ar').classList.remove('hidden');
         document.documentElement.dir = 'ltr';
+        convertPageNumbers(false); // تحويل الأرقام إلى إنجليزي
       }
     }
+
+    // تحويل الأرقام إلى عربي عند تحميل الصفحة
+    window.addEventListener('DOMContentLoaded', function() {
+      convertPageNumbers(true);
+    });
 
     // Smooth scroll behavior
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
