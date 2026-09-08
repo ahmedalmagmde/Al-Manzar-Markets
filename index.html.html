@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>أسواق المنظر | Al Manzar Markets</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap');
+    
+    * { font-family: 'Cairo', sans-serif; }
+    
+    /* Smooth transitions */
+    * { transition: all 0.3s ease; }
+    
+    /* Custom scrollbar */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: rgba(16, 185, 129, 0.1); }
+    ::-webkit-scrollbar-thumb { background: #10b981; border-radius: 10px; }
+    ::-webkit-scrollbar-thumb:hover { background: #059669; }
+    
+    /* Animations */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes slideInRight {
+      from { opacity: 0; transform: translateX(-20px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    
+    @keyframes scaleIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    
+    .anim-fadeInUp { animation: fadeInUp 0.6s ease forwards; }
+    .anim-slideInRight { animation: slideInRight 0.6s ease forwards; }
+    .anim-scaleIn { animation: scaleIn 0.5s ease forwards; }
+    .float-subtle { animation: float 4s ease-in-out infinite; }
+    
+    /* Stagger animation */
+    .stagger-1 { animation-delay: 0.1s; }
+    .stagger-2 { animation-delay: 0.2s; }
+    .stagger-3 { animation-delay: 0.3s; }
+    .stagger-4 { animation-delay: 0.4s; }
+    .stagger-5 { animation-delay: 0.5s; }
+    
+    /* Product cards */
+    .product-card {
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .product-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s;
+    }
+    
+    .product-card:hover::before { left: 100%; }
+    
+    /* Gradient text */
+    .text-gradient {
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    /* Glow effect */
+    .glow {
+      box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+    }
+    
+    .glow:hover {
+      box-shadow: 0 0 30px rgba(16, 185, 129, 0.5);
+    }
+    
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(3px);
+    }
+    
+    .modal.active { display: flex; }
+    
+    /* Tab animation */
+    .tab-content {
+      display: none;
+    }
+    
+    .tab-content.active {
+      display: block;
+      animation: fadeInUp 0.4s ease;
+    }
+  </style>
+<base target="_blank">
+</head>
+<body class="bg-gradient-to-b from-emerald-50 via-white to-green-50" dir="rtl">
+
+  <!-- Navigation -->
+  <nav class="fixed top-0 w-full bg-white/80 backdrop-blur-md z-40 border-b border-emerald-100">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <span class="text-3xl">🛒</span>
+        <span class="font-bold text-emerald-900 text-lg">أسواق المنظر</span>
+      </div>
+      <div class="flex gap-3">
+        <button onclick="showLang('ar')" id="switch-ar" class="px-4 py-2 rounded-full text-sm font-bold bg-emerald-100 text-emerald-900 hover:bg-emerald-200 hidden">العربية</button>
+        <button onclick="showLang('en')" id="switch-en" class="px-4 py-2 rounded-full text-sm font-bold bg-emerald-100 text-emerald-900 hover:bg-emerald-200">English</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Arabic Version -->
+  <div id="page-ar" class="hidden" dir="rtl">
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 px-4">
+      <div class="max-w-6xl mx-auto">
+        <div class="grid md:grid-cols-2 gap-10 items-center">
+          <div class="anim-fadeInUp">
+            <h1 class="text-5xl md:text-6xl font-extrabold mb-4 text-emerald-900 leading-tight">
+              كل احتياجاتك
+              <span class="text-gradient"> اليومية</span>
+              في مكان واحد
+            </h1>
+            <p class="text-xl text-gray-600 mb-8 leading-relaxed">
+              متجرك الموثوق للتسوق اليومي • منتجات طازة • أسعار عادلة • خدمة سريعة
+            </p>
+            <button onclick="document.getElementById('contact-section').scrollIntoView({behavior: 'smooth'})" class="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 rounded-xl font-bold text-lg glow transition-all hover:scale-105">
+              اطلب الآن 🚀
+            </button>
+          </div>
+          <div class="anim-scaleIn">
+            <div class="text-center">
+              <div class="inline-flex items-center justify-center w-40 h-40 rounded-3xl bg-gradient-to-br from-emerald-400 to-emerald-600 text-white text-8xl float-subtle">
+                🛍️
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-20 px-4 bg-white/50">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-4xl font-bold text-emerald-900 text-center mb-16">لماذا تختار أسواق المنظر؟</h2>
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="anim-fadeInUp stagger-1 p-8 rounded-2xl bg-gradient-to-br from-emerald-50 to-green-50 border border-emerald-200">
+            <div class="text-5xl mb-4">⚡</div>
+            <h3 class="text-2xl font-bold text-emerald-900 mb-3">توصيل سريع</h3>
+            <p class="text-gray-600">توصيل فوري في نفس اليوم لجميع طلباتك بكل أمان</p>
+          </div>
+          <div class="anim-fadeInUp stagger-2 p-8 rounded-2xl bg-gradient-to-br from-emerald-50 to-green-50 border border-emerald-200">
+            <div class="text-5xl mb-4">🌟</div>
+            <h3 class="text-2xl font-bold text-emerald-900 mb-3">منتجات طازة</h3>
+            <p class="text-gray-600">نختار أفضل المنتجات الطازة لك مباشرة من المصادر الموثوقة</p>
+          </div>
+          <div class="anim-fadeInUp stagger-3 p-8 rounded-2xl bg-gradient-to-br from-emerald-50 to-green-50 border border-emerald-200">
+            <div class="text-5xl mb-4">💰</div>
+            <h3 class="text-2xl font-bold text-emerald-900 mb-3">أسعار تنافسية</h3>
+            <p class="text-gray-600">أفضل الأسعار في السوق مع عروض حصرية أسبوعية</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Products Gallery -->
+    <section class="py-20 px-4">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-4xl font-bold text-emerald-900 text-center mb-16">منتجاتنا المتنوعة</h2>
+        <div class="grid md:grid-cols-4 gap-6">
+          <div class="anim-scaleIn stagger-1 product-card rounded-2xl bg-white p-6 border border-emerald-100 hover:shadow-xl cursor-pointer group">
+            <div class="text-6xl mb-4 group-hover:scale-110 origin-bottom">🥬</div>
+            <h3 class="font-bold text-emerald-900 text-lg mb-1">الخضراوات</h3>
+            <p class="text-gray-500 text-sm">طازة يومياً</p>
+          </div>
+          <div class="anim-scaleIn stagger-2 product-card rounded-2xl bg-white p-6 border border-emerald-100 hover:shadow-xl cursor-pointer group">
+            <div class="text-6xl mb-4 group-hover:scale-110 origin-bottom">🍎</div>
+            <h3 class="font-bold text-emerald-900 text-lg mb-1">الفواكه</h3>
+            <p class="text-gray-500 text-sm">فواكه موسمية</p>
+          </div>
+          <div class="anim-scaleIn stagger-3 product-card rounded-2xl bg-white p-6 border border-emerald-100 hover:shadow-xl cursor-pointer group">
+            <div class="text-6xl mb-4 group-hover:scale-110 origin-bottom">🥛</div>
+            <h3 class="font-bold text-emerald-900 text-lg mb-1">الألبان</h3>
+            <p class="text-gray-500 text-sm">منتجات صحية</p>
+          </div>
+          <div class="anim-scaleIn stagger-4 product-card rounded-2xl bg-white p-6 border border-emerald-100 hover:shadow-xl cursor-pointer group">
+            <div class="text-6xl mb-4 group-hover:scale-110 origin-bottom">🍞</div>
+            <h3 class="font-bold text-emerald-900 text-lg mb-1">المخبوزات</h3>
+            <p class="text-gray-500 text-sm">طازة كل يوم</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Opening Hours -->
+    <section class="py-20 px-4 bg-emerald-900 text-white">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-4xl font-bold text-center mb-16">ساعات العمل</h2>
+        <div class="grid md:grid-cols-2 gap-8 max-w-2xl mx-auto">
+          <div class="anim-slideInRight stagger-1 text-center p-6 bg-emerald-800/50 rounded-xl">
+            <p class="text-lg font-bold mb-2">أيام العمل</p>
+            <p class="text-emerald-100">السبت - الخميس</p>
+            <p class="text-2xl font-bold text-emerald-300 mt-2">7:00 ص - 11:00 م</p>
+          </div>
+          <div class="anim-slideInRight stagger-2 text-center p-6 bg-emerald-800/50 rounded-xl">
+            <p class="text-lg font-bold mb-2">عطلة أسبوعية</p>
+            <p class="text-emerald-100">الجمعة</p>
+            <p class="text-2xl font-bold text-emerald-300 mt-2">مغلق</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reviews -->
+    <section class="py-20 px-4">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-4xl font-bold text-emerald-900 text-center mb-16">آراء عملائنا</h2>
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="anim-fadeInUp stagger-1 p-8 rounded-2xl bg-white border-l-4 border-emerald-500 hover:shadow-lg">
+            <div class="flex items-center gap-1 mb-3">⭐⭐⭐⭐⭐</div>
+            <p class="text-gray-600 mb-4">"منتجات طازة وخدمة ممتازة جداً، أنا من أوفى الزبائن"</p>
+            <p class="font-bold text-emerald-900">أم سارة</p>
+          </div>
+          <div class="anim-fadeInUp stagger-2 p-8 rounded-2xl bg-white border-l-4 border-emerald-500 hover:shadow-lg">
+            <div class="flex items-center gap-1 mb-3">⭐⭐⭐⭐⭐</div>
+            <p class="text-gray-600 mb-4">"الأسعار رائعة والتوصيل سريع جداً. موصى به!"</p>
+            <p class="font-bold text-emerald-900">محمد</p>
+          </div>
+          <div class="anim-fadeInUp stagger-3 p-8 rounded-2xl bg-white border-l-4 border-emerald-500 hover:shadow-lg">
+            <div class="flex items-center gap-1 mb-3">⭐⭐⭐⭐⭐</div>
+            <p class="text-gray-600 mb-4">"افضل متجر في الخيط، الكل يبحث عنهم الآن"</p>
+            <p class="font-bold text-emerald-900">أم محمود</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact-section" class="py-20 px-4 bg-gradient-to-r from-emerald-600 to-emerald-700">
+      <div class="max-w-2xl mx-auto">
+        <h2 class="text-4xl font-bold text-white text-center mb-12">تواصل معنا</h2>
+        
+        <div class="grid md:grid-cols-2 gap-6 mb-8">
+          <!-- Map Card -->
+          <div class="anim-fadeInUp stagger-1 bg-white rounded-2xl p-8">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="text-3xl">📍</span>
+              <h3 class="text-xl font-bold text-emerald-900">موقعنا</h3>
+            </div>
+            <p class="text-gray-600 mb-6">شارع الملك فهد، حي الخيط، خميس مشيط</p>
+            <a href="https://maps.app.goo.gl/TYAYNCC6JaU3nHkMA" target="_blank" class="block w-full bg-emerald-600 hover:bg-emerald-700 text-white py-3 rounded-xl font-bold text-center transition-all hover:scale-105">
+              🗺️ افتح الخريطة
+            </a>
+          </div>
+
+          <!-- Phone Card -->
+          <div class="anim-fadeInUp stagger-2 bg-white rounded-2xl p-8">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="text-3xl">📞</span>
+              <h3 class="text-xl font-bold text-emerald-900">اتصل بنا</h3>
+            </div>
+            <p class="text-gray-600 mb-2 text-lg font-bold">050 308 0315</p>
+            <p class="text-gray-500 text-sm mb-6">متاح 24/7</p>
+            <a href="tel:0503080315" class="block w-full bg-emerald-600 hover:bg-emerald-700 text-white py-3 rounded-xl font-bold text-center transition-all hover:scale-105">
+              ☎️ اتصل الآن
+            </a>
+          </div>
+        </div>
+
+        <!-- WhatsApp CTA -->
+        <div class="anim-fadeInUp stagger-3 bg-white rounded-2xl p-8">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="text-3xl">💬</span>
+            <h3 class="text-xl font-bold text-emerald-900">اطلب عبر WhatsApp</h3>
+          </div>
+          <p class="text-gray-600 mb-6">اطلب منتجاتك الآن وسنصلك بسرعة</p>
+          <a href="https://wa.me/966503080315?text=%F0%9F%91%8B%20%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D8%A3%D8%B3%D9%88%D8%A7%D9%82%20%D8%A7%D9%84%D9%85%D9%86%D8%B8%D8%B1%0A%F0%9F%9B%92%20%D8%B9%D9%86%D8%AF%D9%8A%20%D8%B7%D9%84%D8%A8%20%D8%AC%D8%AF%D9%8A%D8%AF" target="_blank" class="block w-full bg-green-500 hover:bg-green-600 text-white py-4 rounded-xl font-extrabold text-lg text-center transition-all hover:scale-105 glow">
+            💬 افتح WhatsApp
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-emerald-900 text-emerald-100 py-12 px-4">
+      <div class="max-w-6xl mx-auto text-center">
+        <p class="mb-2">© 2026 أسواق المنظر | جميع الحقوق محفوظة</p>
+        <p class="text-sm text-emerald-200">متجرك الموثوق للتسوق اليومي ✨</p>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- English Version -->
+  <div id="page-en" class="hidden" dir="ltr">
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 px-4">
+      <div class="max-w-6xl mx-auto">
+        <div class="grid md:grid-cols-2 gap-10 items-center">
+          <div class="anim-fadeInUp">
+            <h1 class="text-5xl md:text-6xl font-extrabold mb-4 text-emerald-900 leading-tight">
+              All Your Daily
+              <span class="text-gradient"> Needs</span>
+              in One Place
+            </h1>
+            <p class="text-xl text-gray-600 mb-8 leading-relaxed">
+              Your trusted shopping destination • Fresh products • Fair prices • Fast service
+            </p>
+            <button onclick="document.getElementById('contact-en').scrollIntoView({behavior: 'smooth'})" class="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 rounded-xl font-bold text-lg glow transition-all hover:scale-105">
+              Order Now 🚀
+            </button>
+          </div>
+          <div class="anim-scaleIn">
+            <div class="text-center">
+              <div class="inline-flex items-center justify-center w-40 h-40 rounded-3xl bg-gradient-to-br from-emerald-400 to-emerald-600 text-white text-8xl float-subtle">
+                🛍️
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-20 px-4 bg-white/50">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-4xl font-bold text-emerald-900 text-center mb-16">Why Choose Al Manzar?</h2>
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="anim-fadeInUp stagger-1 p-8 rounded-2xl bg-gradient-to-br from-emerald-50 to-green-50 border border-emerald-200">
+            <div class="text-5xl mb-4">⚡</div>
+            <h3 class="text-2xl font-bold text-emerald-900 mb-3">Fast Delivery</h3>
+            <p class="text-gray-600">Same-day delivery for all your orders with complete safety</p>
+          </div>
+          <div class="anim-fadeInUp stagger-2 p-8 rounded-2xl bg-gradient-to-br from-emerald-50 to-green-50 border border-emerald-200">
+            <div class="text-5xl mb-4">🌟</div>
+            <h3 class="text-2xl font-bold text-emerald-900 mb-3">Fresh Products</h3>
+            <p class="text-gray-600">We select the best fresh products directly from trusted sources</p>
+          </div>
+          <div class="anim-fadeInUp stagger-3 p-8 rounded-2xl bg-gradient-to-br from-emerald-50 to-green-50 border border-emerald-200">
+            <div class="text-5xl mb-4">💰</div>
+            <h3 class="text-2xl font-bold text-emerald-900 mb-3">Great Prices</h3>
+            <p class="text-gray-600">Best market prices with exclusive weekly offers</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Products Gallery -->
+    <section class="py-20 px-4">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-4xl font-bold text-emerald-900 text-center mb-16">Our Products</h2>
+        <div class="grid md:grid-cols-4 gap-6">
+          <div class="anim-scaleIn stagger-1 product-card rounded-2xl bg-white p-6 border border-emerald-100 hover:shadow-xl cursor-pointer group">
+            <div class="text-6xl mb-4 group-hover:scale-110 origin-bottom">🥬</div>
+            <h3 class="font-bold text-emerald-900 text-lg mb-1">Vegetables</h3>
+            <p class="text-gray-500 text-sm">Fresh Daily</p>
+          </div>
+          <div class="anim-scaleIn stagger-2 product-card rounded-2xl bg-white p-6 border border-emerald-100 hover:shadow-xl cursor-pointer group">
+            <div class="text-6xl mb-4 group-hover:scale-110 origin-bottom">🍎</div>
+            <h3 class="font-bold text-emerald-900 text-lg mb-1">Fruits</h3>
+            <p class="text-gray-500 text-sm">Seasonal Fruits</p>
+          </div>
+          <div class="anim-scaleIn stagger-3 product-card rounded-2xl bg-white p-6 border border-emerald-100 hover:shadow-xl cursor-pointer group">
+            <div class="text-6xl mb-4 group-hover:scale-110 origin-bottom">🥛</div>
+            <h3 class="font-bold text-emerald-900 text-lg mb-1">Dairy</h3>
+            <p class="text-gray-500 text-sm">Healthy Products</p>
+          </div>
+          <div class="anim-scaleIn stagger-4 product-card rounded-2xl bg-white p-6 border border-emerald-100 hover:shadow-xl cursor-pointer group">
+            <div class="text-6xl mb-4 group-hover:scale-110 origin-bottom">🍞</div>
+            <h3 class="font-bold text-emerald-900 text-lg mb-1">Bakery</h3>
+            <p class="text-gray-500 text-sm">Fresh Every Day</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Opening Hours -->
+    <section class="py-20 px-4 bg-emerald-900 text-white">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-4xl font-bold text-center mb-16">Opening Hours</h2>
+        <div class="grid md:grid-cols-2 gap-8 max-w-2xl mx-auto">
+          <div class="anim-slideInRight stagger-1 text-center p-6 bg-emerald-800/50 rounded-xl">
+            <p class="text-lg font-bold mb-2">Working Days</p>
+            <p class="text-emerald-100">Saturday - Thursday</p>
+            <p class="text-2xl font-bold text-emerald-300 mt-2">7:00 AM - 11:00 PM</p>
+          </div>
+          <div class="anim-slideInRight stagger-2 text-center p-6 bg-emerald-800/50 rounded-xl">
+            <p class="text-lg font-bold mb-2">Weekly Closure</p>
+            <p class="text-emerald-100">Friday</p>
+            <p class="text-2xl font-bold text-emerald-300 mt-2">Closed</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reviews -->
+    <section class="py-20 px-4">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-4xl font-bold text-emerald-900 text-center mb-16">What Our Customers Say</h2>
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="anim-fadeInUp stagger-1 p-8 rounded-2xl bg-white border-l-4 border-emerald-500 hover:shadow-lg">
+            <div class="flex items-center gap-1 mb-3">⭐⭐⭐⭐⭐</div>
+            <p class="text-gray-600 mb-4">"Fresh products and excellent service. I'm a loyal customer!"</p>
+            <p class="font-bold text-emerald-900">Fatima</p>
+          </div>
+          <div class="anim-fadeInUp stagger-2 p-8 rounded-2xl bg-white border-l-4 border-emerald-500 hover:shadow-lg">
+            <div class="flex items-center gap-1 mb-3">⭐⭐⭐⭐⭐</div>
+            <p class="text-gray-600 mb-4">"Amazing prices and super fast delivery. Highly recommended!"</p>
+            <p class="font-bold text-emerald-900">Mohammed</p>
+          </div>
+          <div class="anim-fadeInUp stagger-3 p-8 rounded-2xl bg-white border-l-4 border-emerald-500 hover:shadow-lg">
+            <div class="flex items-center gap-1 mb-3">⭐⭐⭐⭐⭐</div>
+            <p class="text-gray-600 mb-4">"Best market in town! Everyone is looking for them now."</p>
+            <p class="font-bold text-emerald-900">Sara</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact-en" class="py-20 px-4 bg-gradient-to-r from-emerald-600 to-emerald-700">
+      <div class="max-w-2xl mx-auto">
+        <h2 class="text-4xl font-bold text-white text-center mb-12">Contact Us</h2>
+        
+        <div class="grid md:grid-cols-2 gap-6 mb-8">
+          <!-- Map Card -->
+          <div class="anim-fadeInUp stagger-1 bg-white rounded-2xl p-8">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="text-3xl">📍</span>
+              <h3 class="text-xl font-bold text-emerald-900">Location</h3>
+            </div>
+            <p class="text-gray-600 mb-6">Al Khayat District, Khamis Mushait</p>
+            <a href="https://maps.app.goo.gl/TYAYNCC6JaU3nHkMA" target="_blank" class="block w-full bg-emerald-600 hover:bg-emerald-700 text-white py-3 rounded-xl font-bold text-center transition-all hover:scale-105">
+              🗺️ View Map
+            </a>
+          </div>
+
+          <!-- Phone Card -->
+          <div class="anim-fadeInUp stagger-2 bg-white rounded-2xl p-8">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="text-3xl">📞</span>
+              <h3 class="text-xl font-bold text-emerald-900">Call Us</h3>
+            </div>
+            <p class="text-gray-600 mb-2 text-lg font-bold">050 308 0315</p>
+            <p class="text-gray-500 text-sm mb-6">Available 24/7</p>
+            <a href="tel:0503080315" class="block w-full bg-emerald-600 hover:bg-emerald-700 text-white py-3 rounded-xl font-bold text-center transition-all hover:scale-105">
+              ☎️ Call Now
+            </a>
+          </div>
+        </div>
+
+        <!-- WhatsApp CTA -->
+        <div class="anim-fadeInUp stagger-3 bg-white rounded-2xl p-8">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="text-3xl">💬</span>
+            <h3 class="text-xl font-bold text-emerald-900">Order on WhatsApp</h3>
+          </div>
+          <p class="text-gray-600 mb-6">Order your products now and we'll deliver quickly</p>
+          <a href="https://wa.me/966503080315?text=%F0%9F%91%8B%20Hello%20Al%20Manzar%20Markets%0A%F0%9F%9B%92%20I%20have%20a%20new%20order%0A%F0%9F%93%8D%20Please%20confirm%20address%20%26%20delivery" target="_blank" class="block w-full bg-green-500 hover:bg-green-600 text-white py-4 rounded-xl font-extrabold text-lg text-center transition-all hover:scale-105 glow">
+            💬 Open WhatsApp
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-emerald-900 text-emerald-100 py-12 px-4">
+      <div class="max-w-6xl mx-auto text-center">
+        <p class="mb-2">© 2026 Al Manzar Markets | All Rights Reserved</p>
+        <p class="text-sm text-emerald-200">Your trusted shopping destination ✨</p>
+      </div>
+    </footer>
+
+  </div>
+
+  <script>
+    function showLang(lang) {
+      if (lang === 'ar') {
+        document.getElementById('page-ar').classList.remove('hidden');
+        document.getElementById('page-en').classList.add('hidden');
+        document.getElementById('switch-en').classList.remove('hidden');
+        document.getElementById('switch-ar').classList.add('hidden');
+        document.documentElement.dir = 'rtl';
+      } else {
+        document.getElementById('page-ar').classList.add('hidden');
+        document.getElementById('page-en').classList.remove('hidden');
+        document.getElementById('switch-en').classList.add('hidden');
+        document.getElementById('switch-ar').classList.remove('hidden');
+        document.documentElement.dir = 'ltr';
+      }
+    }
+
+    // Smooth scroll behavior
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
