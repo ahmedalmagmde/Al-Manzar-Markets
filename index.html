@@ -25,7 +25,7 @@
       overflow-x: hidden;
     }
 
-    /* Navbar Styles */
+    /* ===== شريط التنقل ===== */
     .navbar {
       background: linear-gradient(90deg, #003DA5 0%, #002E7F 100%);
       box-shadow: 0 8px 25px rgba(0, 61, 165, 0.3);
@@ -48,7 +48,7 @@
       gap: 10px;
     }
 
-    /* Hero Section */
+    /* ===== Hero Section ===== */
     .hero-section {
       background: #003DA5;
       position: relative;
@@ -60,6 +60,7 @@
       color: white;
     }
 
+    /* إعدادات خلفية الفيديو */
     .hero-video {
       position: absolute;
       top: 0;
@@ -107,7 +108,7 @@
       text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
     }
 
-    /* Buttons */
+    /* ===== أزرار ===== */
     .btn-primary {
       background: linear-gradient(135deg, #E31937 0%, #D90F2B 100%);
       color: white;
@@ -155,7 +156,7 @@
       border-color: transparent;
     }
 
-    /* Sections */
+    /* ===== الأقسام ===== */
     .section-title {
       font-size: 2.8rem;
       color: #003DA5;
@@ -179,7 +180,7 @@
       border-radius: 10px;
     }
 
-    /* Feature Cards */
+    /* ===== بطاقات المميزات ===== */
     .feature-card {
       background: white;
       border-radius: 8px;
@@ -224,7 +225,7 @@
       font-weight: 500;
     }
 
-    /* Product Cards */
+    /* ===== بطاقات المنتجات ===== */
     .product-card {
       background: white;
       border-radius: 8px;
@@ -285,225 +286,131 @@
       font-weight: 600;
     }
 
-    /* Promo Badge */
+    /* ===== بطاقة التخفيف ===== */
     .promo-badge {
       background: linear-gradient(135deg, #E31937 0%, #FFC220 100%);
       color: white;
       padding: 20px;
-      border-radius: 12px;
-      font-size: 1.3rem;
-      font-weight: 900;
+      border-radius: 8px;
       text-align: center;
+      margin-bottom: 60px;
+      box-shadow: 0 10px 30px rgba(227, 25, 55, 0.25);
+      font-weight: 900;
+      font-size: 1.3rem;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
-      box-shadow: 0 8px 20px rgba(227, 25, 55, 0.3);
-      animation: pulse 2s ease-in-out infinite;
     }
 
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.8; }
-    }
-
-    /* Hours Section */
+    /* ===== قسم الساعات ===== */
     .hours-section {
-      background: linear-gradient(135deg, #F5F5F5 0%, #FFFFFF 100%);
-      border-radius: 12px;
-      padding: 50px 30px;
-      box-shadow: 0 8px 30px rgba(0, 61, 165, 0.12);
+      background: linear-gradient(135deg, #003DA5 0%, #002E7F 100%);
+      border-radius: 8px;
+      padding: 50px 40px;
+      text-align: center;
+      color: white;
+      box-shadow: 0 12px 40px rgba(0, 61, 165, 0.3);
       position: relative;
       overflow: hidden;
-      border-left: 8px solid #E31937;
+    }
+
+    .hours-section::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(255, 194, 32, 0.15) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .hours-content {
+      position: relative;
+      z-index: 2;
     }
 
     .status-badge {
-      background: linear-gradient(135deg, #2CAA4B 0%, #20A038 100%);
-      color: white;
-      padding: 12px 20px;
-      border-radius: 30px;
-      font-weight: 900;
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
+      background: rgba(255, 194, 32, 0.2);
+      border: 2px solid #FFC220;
+      color: #FFC220;
+      padding: 12px 25px;
+      border-radius: 50px;
       margin-bottom: 20px;
-      font-size: 1rem;
+      font-weight: 900;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
+      font-size: 0.95rem;
     }
 
     .pulse-dot {
       width: 12px;
       height: 12px;
-      background: white;
+      background: #FFC220;
       border-radius: 50%;
-      display: inline-block;
-      animation: pulse-dot 1.5s ease-in-out infinite;
+      animation: pulse 2s ease-in-out infinite;
     }
 
-    @keyframes pulse-dot {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.3; }
-    }
-
-    .hours-content {
-      text-align: center;
-      color: #003DA5;
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.2); }
     }
 
     .hours-time {
-      font-size: 2.5rem;
+      font-size: 2.8rem;
       font-weight: 900;
-      color: #E31937;
       margin: 20px 0;
-      letter-spacing: 1px;
+      color: #FFC220;
+      text-transform: uppercase;
     }
 
-    /* Review Cards */
+    /* ===== بطاقات التقييمات ===== */
     .review-card {
       background: white;
       border-radius: 8px;
       padding: 30px;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 6px 25px rgba(0, 61, 165, 0.1);
       transition: all 0.4s ease;
-      text-align: center;
-      border-right: 5px solid #FFC220;
+      border-left: 6px solid #2CAA4B;
     }
 
     .review-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 15px 40px rgba(0, 61, 165, 0.15);
+      transform: translateY(-12px);
+      box-shadow: 0 15px 40px rgba(0, 61, 165, 0.2);
+      border-left-color: #E31937;
     }
 
     .stars {
+      color: #FFC220;
       font-size: 1.3rem;
       margin-bottom: 15px;
       letter-spacing: 3px;
     }
 
     .review-text {
-      color: #666;
+      color: #555;
       font-size: 1rem;
-      line-height: 1.8;
+      line-height: 1.7;
       margin-bottom: 15px;
-      font-weight: 600;
-      font-style: italic;
+      font-weight: 500;
     }
 
     .review-author {
       color: #003DA5;
       font-weight: 900;
       font-size: 1.1rem;
-    }
-
-    /* Comments Section */
-    .comments-section {
-      background: #FFFFFF;
-      border-radius: 12px;
-      padding: 40px;
-      margin-top: 40px;
-      box-shadow: 0 8px 25px rgba(0, 61, 165, 0.1);
-    }
-
-    .comment-form {
-      display: grid;
-      gap: 15px;
-      margin-bottom: 40px;
-    }
-
-    .form-group {
-      display: grid;
-      gap: 8px;
-    }
-
-    .form-group label {
-      color: #003DA5;
-      font-weight: 900;
-      font-size: 1rem;
       text-transform: uppercase;
     }
 
-    .form-group input,
-    .form-group textarea {
-      padding: 12px 15px;
-      border: 2px solid #E0E0E0;
+    /* ===== قسم التواصل ===== */
+    .contact-wrapper {
+      background: white;
       border-radius: 8px;
-      font-family: 'Cairo', sans-serif;
-      font-size: 1rem;
-      transition: all 0.3s ease;
-      resize: vertical;
-      min-height: 100px;
+      padding: 50px 40px;
+      margin-bottom: 60px;
+      box-shadow: 0 10px 35px rgba(0, 61, 165, 0.1);
     }
 
-    .form-group input:focus,
-    .form-group textarea:focus {
-      outline: none;
-      border-color: #E31937;
-      box-shadow: 0 0 0 4px rgba(227, 25, 55, 0.1);
-    }
-
-    .submit-btn {
-      background: linear-gradient(135deg, #E31937 0%, #D90F2B 100%);
-      color: white;
-      padding: 14px 40px;
-      border: none;
-      border-radius: 8px;
-      font-weight: 900;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .submit-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 25px rgba(227, 25, 55, 0.4);
-    }
-
-    .comments-list {
-      display: grid;
-      gap: 20px;
-    }
-
-    .comment-item {
-      background: #F9F9F9;
-      padding: 20px;
-      border-radius: 8px;
-      border-right: 4px solid #2CAA4B;
-      transition: all 0.3s ease;
-    }
-
-    .comment-item:hover {
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    }
-
-    .comment-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 10px;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .comment-name {
-      color: #003DA5;
-      font-weight: 900;
-      font-size: 1.1rem;
-    }
-
-    .comment-date {
-      color: #999;
-      font-size: 0.9rem;
-    }
-
-    .comment-text {
-      color: #555;
-      line-height: 1.8;
-      font-weight: 500;
-    }
-
-    /* Contact Cards */
     .contact-card {
       background: linear-gradient(135deg, #F5F5F5 0%, #FFFFFF 100%);
       border-radius: 8px;
@@ -540,7 +447,7 @@
       font-weight: 600;
     }
 
-    /* Footer */
+    /* ===== Footer ===== */
     footer {
       background: linear-gradient(90deg, #003DA5 0%, #002E7F 100%);
       color: white;
@@ -554,7 +461,7 @@
       font-weight: 600;
     }
 
-    /* Mobile Responsive */
+    /* ===== استجابة الجوال ===== */
     @media (max-width: 768px) {
       .hero-title {
         font-size: 2rem !important;
@@ -582,9 +489,6 @@
       section {
         padding: 30px 15px !important;
       }
-      .comments-section {
-        padding: 25px 15px !important;
-      }
     }
 
     @media (max-width: 480px) {
@@ -608,7 +512,7 @@
 </head>
 <body dir="rtl">
 
-  <!-- Navbar -->
+  <!-- ===== Navbar ===== -->
   <nav class="navbar py-3 px-4">
     <div class="max-w-6xl mx-auto flex items-center justify-between">
       <div class="navbar-brand">
@@ -619,7 +523,7 @@
     </div>
   </nav>
 
-  <!-- Hero Section -->
+  <!-- ===== Hero Section ===== -->
   <section class="hero-section">
     <video autoplay loop muted playsinline class="hero-video">
       <source src="https://res.cloudinary.com/bikun1es/video/upload/v1789121471/videos.mp4" type="video/mp4">
@@ -635,14 +539,14 @@
     </div>
   </section>
 
-  <!-- Promo Banner -->
+  <!-- ===== Promo Banner ===== -->
   <section class="py-6 px-4">
     <div class="max-w-6xl mx-auto">
       <div class="promo-badge">🎉 عروض حصرية وتخفيضات يومية لك 🎉</div>
     </div>
   </section>
 
-  <!-- Features Section -->
+  <!-- ===== Features Section ===== -->
   <section class="py-16 px-4 bg-white">
     <div class="max-w-6xl mx-auto">
       <h2 class="section-title">لماذا تختار أسواق المنظر؟</h2>
@@ -666,7 +570,7 @@
     </div>
   </section>
 
-  <!-- Products Section -->
+  <!-- ===== Products Section ===== -->
   <section class="py-16 px-4 bg-gray-100">
     <div class="max-w-6xl mx-auto">
       <h2 class="section-title">منتجاتنا</h2>
@@ -695,7 +599,7 @@
     </div>
   </section>
 
-  <!-- Hours Section -->
+  <!-- ===== Hours Section ===== -->
   <section class="py-16 px-4">
     <div class="max-w-2xl mx-auto">
       <div class="hours-section">
@@ -713,7 +617,7 @@
     </div>
   </section>
 
-  <!-- Reviews Section -->
+  <!-- ===== Reviews Section ===== -->
   <section class="py-16 px-4 bg-white">
     <div class="max-w-6xl mx-auto">
       <h2 class="section-title">آراء عملائنا</h2>
@@ -731,55 +635,14 @@
         <div class="review-card">
           <div class="stars">⭐⭐⭐⭐⭐</div>
           <p class="review-text">"أفضل متجر في المنطقة، خدمة رائعة جداً وسعيد بالتعامل"</p>
-          <p class="review-author">علي</p>
+          <p class="review-author">أم محمود</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Comments Section -->
+  <!-- ===== Contact Section ===== -->
   <section class="py-16 px-4 bg-gray-100">
-    <div class="max-w-6xl mx-auto">
-      <h2 class="section-title">اترك تعليقك</h2>
-      <div class="comments-section">
-        <form class="comment-form" id="commentForm">
-          <div class="form-group">
-            <label for="name">اسمك</label>
-            <input type="text" id="name" name="name" placeholder="أدخل اسمك" required>
-          </div>
-          <div class="form-group">
-            <label for="email">بريدك الإلكتروني</label>
-            <input type="email" id="email" name="email" placeholder="أدخل بريدك الإلكتروني" required>
-          </div>
-          <div class="form-group">
-            <label for="comment">تعليقك</label>
-            <textarea id="comment" name="comment" placeholder="شارك تجربتك معنا..." required></textarea>
-          </div>
-          <button type="submit" class="submit-btn">إرسال التعليق</button>
-        </form>
-
-        <div class="comments-list" id="commentsList">
-          <div class="comment-item">
-            <div class="comment-header">
-              <span class="comment-name">فاطمة</span>
-              <span class="comment-date">اليوم</span>
-            </div>
-            <p class="comment-text">خدمة ممتازة وسريعة جداً، شكراً لكم 💚</p>
-          </div>
-          <div class="comment-item">
-            <div class="comment-header">
-              <span class="comment-name">أحمد</span>
-              <span class="comment-date">أمس</span>
-            </div>
-            <p class="comment-text">المنتجات طازة وجودتها عالية جداً 👍</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact Section -->
-  <section class="py-16 px-4 bg-white">
     <div class="max-w-5xl mx-auto">
       <h2 class="section-title">تواصل معنا الآن</h2>
       <div class="contact-wrapper">
@@ -794,6 +657,7 @@
           <div class="contact-card">
             <div class="contact-icon">📞</div>
             <h3>اتصل بنا</h3>
+            <!-- التعديل تم هنا بإضافة dir="ltr" -->
             <p dir="ltr" style="font-size: 1.2rem; color: #E31937; margin-top: 5px;">050 308 0315</p>
             <p style="color: #999; font-size: 0.85rem;">متاح 24/7</p>
             <a href="tel:0503080315" class="btn-primary mt-4 inline-block" style="font-size: 0.9rem; padding: 10px 20px;">☎️ اتصل</a>
@@ -810,16 +674,16 @@
     </div>
   </section>
 
-  <!-- Footer -->
+  <!-- ===== Footer ===== -->
   <footer>
     <div class="max-w-6xl mx-auto">
-      <p>© 2027 أسواق المنظر | جميع الحقوق محفوظة</p>
+      <p>© 2026 أسواق المنظر | جميع الحقوق محفوظة</p>
       <p style="font-size: 0.9rem; opacity: 0.8;">متجرك الموثوق للتسوق الذكي ✨</p>
     </div>
   </footer>
 
   <script>
-    // إعدادات الصفحة
+    // ===== كود العودة لأعلى الصفحة عند التحديث =====
     if ('scrollRestoration' in history) {
       history.scrollRestoration = 'manual';
     }
@@ -832,35 +696,6 @@
         navbar.classList.add('scrolled');
       } else {
         navbar.classList.remove('scrolled');
-      }
-    });
-
-    // Comments form handler
-    const commentForm = document.getElementById('commentForm');
-    const commentsList = document.getElementById('commentsList');
-
-    commentForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-
-      const name = document.getElementById('name').value;
-      const email = document.getElementById('email').value;
-      const comment = document.getElementById('comment').value;
-
-      if (name && email && comment) {
-        const newComment = document.createElement('div');
-        newComment.className = 'comment-item';
-        newComment.innerHTML = `
-          <div class="comment-header">
-            <span class="comment-name">${name}</span>
-            <span class="comment-date">الآن</span>
-          </div>
-          <p class="comment-text">${comment}</p>
-        `;
-
-        commentsList.insertBefore(newComment, commentsList.firstChild);
-        commentForm.reset();
-
-        alert('شكراً لتعليقك! تم إرسال رسالتك بنجاح 🎉');
       }
     });
   </script>
