@@ -5,662 +5,751 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
   <title>أسواق المنظر</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap');
     * { font-family: 'Cairo', sans-serif; }
 
     :root {
-      --emerald: #10b981;
-      --emerald-dark: #059669;
+      --primary-blue: #003DA5;
+      --bright-red: #E31937;
+      --accent-yellow: #FFC220;
+      --bright-green: #2CAA4B;
+      --light-gray: #F5F5F5;
+      --dark-text: #1A1A1A;
     }
 
-    /* ===== خلفية متحركة (جزيئات عائمة) ===== */
-    #particles-canvas {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      z-index: 0;
-      pointer-events: none;
-    }
+    html, body { scroll-behavior: smooth; }
 
     body {
-      background: linear-gradient(-45deg, #ecfdf5, #ffffff, #f0fdf4, #d1fae5);
-      background-size: 400% 400%;
-      animation: bgGradient 15s ease infinite;
+      background: #F5F5F5;
       overflow-x: hidden;
     }
 
-    @keyframes bgGradient {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
     /* ===== شريط التنقل ===== */
-    .glass-nav {
-      background: rgba(255,255,255,0.8);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(16,185,129,0.15);
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    .glass-nav.scrolled {
-      box-shadow: 0 8px 30px rgba(16,185,129,0.15);
-      background: rgba(255,255,255,0.95);
+    .navbar {
+      background: linear-gradient(90deg, #003DA5 0%, #002E7F 100%);
+      box-shadow: 0 8px 25px rgba(0, 61, 165, 0.3);
+      transition: all 0.3s ease;
+      position: sticky;
+      top: 0;
+      z-index: 50;
     }
 
-    /* ===== أنيميشن دخول عام (Scroll Reveal) ===== */
-    .reveal {
-      opacity: 0;
-      transform: translateY(60px);
-      transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
-                  transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-    .reveal.active { opacity: 1; transform: translateY(0); }
-
-    .reveal-right { transform: translateX(-80px); }
-    .reveal-left  { transform: translateX(80px); }
-    .reveal-zoom  { transform: scale(0.85); }
-    .reveal-flip  { transform: perspective(1000px) rotateY(25deg); }
-
-    /* ===== العنوان الرئيسي ===== */
-    .hero-word {
-      display: inline-block;
-      opacity: 0;
-      transform: translateY(50px) rotateX(90deg);
-      animation: wordIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-    }
-    @keyframes wordIn {
-      to { opacity: 1; transform: translateY(0) rotateX(0); }
+    .navbar.scrolled {
+      box-shadow: 0 12px 35px rgba(0, 61, 165, 0.4);
     }
 
-    .text-gradient-anim {
-      background: linear-gradient(135deg, #10b981, #34d399, #059669, #10b981);
-      background-size: 300% 300%;
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: gradientShift 4s ease infinite;
-    }
-    @keyframes gradientShift {
-      0%, 100% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
+    .navbar-brand {
+      color: white;
+      font-size: 1.5rem;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
-    /* ===== أيقونة الطفو ===== */
-    .float-hero {
-      animation: floaty 4s ease-in-out infinite;
-      filter: drop-shadow(0 25px 40px rgba(16,185,129,0.35));
-    }
-    @keyframes floaty {
-      0%, 100% { transform: translateY(0) rotate(-3deg); }
-      50% { transform: translateY(-20px) rotate(3deg); }
-    }
-
-    /* ===== هالة نابضة ===== */
-    .pulse-ring::before {
-      content: '';
-      position: absolute;
-      inset: -20px;
-      border-radius: inherit;
-      border: 3px solid rgba(16,185,129,0.4);
-      animation: pulseRing 2.2s ease-out infinite;
-    }
-    @keyframes pulseRing {
-      0% { transform: scale(0.8); opacity: 1; }
-      100% { transform: scale(1.4); opacity: 0; }
-    }
-
-    /* ===== بطاقات المنتجات ===== */
-    .product-card {
+    /* ===== Hero Section ===== */
+    .hero-section {
+      background: linear-gradient(135deg, #003DA5 0%, #E31937 50%, #FFC220 100%);
       position: relative;
       overflow: hidden;
-      transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s;
+      min-height: 550px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
     }
-    .product-card::before {
+
+    .hero-section::before {
       content: '';
       position: absolute;
-      top: 0; left: -100%;
-      width: 100%; height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
-      transition: left 0.6s;
+      top: -40%;
+      right: -10%;
+      width: 600px;
+      height: 600px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      animation: float 8s ease-in-out infinite;
     }
-    .product-card:hover::before { left: 100%; }
-    .product-card:hover {
-      transform: translateY(-12px) rotate(1deg) scale(1.04);
-      box-shadow: 0 25px 50px rgba(16,185,129,0.25);
+
+    .hero-section::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: -15%;
+      width: 500px;
+      height: 500px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 50%;
+      animation: float 10s ease-in-out infinite reverse;
     }
-    .product-card .emoji {
-      transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-40px); }
     }
-    .product-card:hover .emoji {
-      transform: scale(1.3) rotate(-8deg);
+
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      max-width: 700px;
+      animation: slideInUp 0.8s ease;
+    }
+
+    @keyframes slideInUp {
+      from {
+        opacity: 0;
+        transform: translateY(60px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero-emoji {
+      font-size: 6rem;
+      animation: bounce 2.5s ease-in-out infinite;
+      margin-bottom: 20px;
+      display: inline-block;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-40px) scale(1.1); }
+    }
+
+    .hero-title {
+      font-size: 3.5rem;
+      font-weight: 900;
+      margin-bottom: 20px;
+      text-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+      line-height: 1.2;
+    }
+
+    .hero-subtitle {
+      font-size: 1.2rem;
+      margin-bottom: 40px;
+      opacity: 0.98;
+      line-height: 1.8;
+      font-weight: 500;
+    }
+
+    /* ===== أزرار ===== */
+    .btn-primary {
+      background: linear-gradient(135deg, #E31937 0%, #D90F2B 100%);
+      color: white;
+      padding: 16px 40px;
+      border-radius: 8px;
+      font-weight: 900;
+      font-size: 1.1rem;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 20px rgba(227, 25, 55, 0.35);
+      display: inline-block;
+      text-decoration: none;
+      min-height: 44px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(227, 25, 55, 0.5);
+    }
+
+    .btn-secondary {
+      background: white;
+      color: #003DA5;
+      padding: 16px 40px;
+      border-radius: 8px;
+      font-weight: 900;
+      font-size: 1.1rem;
+      border: 3px solid #003DA5;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-block;
+      text-decoration: none;
+      min-height: 44px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .btn-secondary:hover {
+      background: #003DA5;
+      color: white;
+      transform: translateY(-4px);
+    }
+
+    /* ===== الأقسام ===== */
+    .section-title {
+      font-size: 2.8rem;
+      color: #003DA5;
+      font-weight: 900;
+      text-align: center;
+      margin-bottom: 60px;
+      position: relative;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 8px;
+      background: linear-gradient(90deg, #E31937, #FFC220);
+      border-radius: 10px;
     }
 
     /* ===== بطاقات المميزات ===== */
     .feature-card {
+      background: white;
+      border-radius: 8px;
+      padding: 35px 25px;
+      text-align: center;
+      box-shadow: 0 6px 20px rgba(0, 61, 165, 0.12);
+      transition: all 0.4s ease;
       position: relative;
       overflow: hidden;
-      transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+      border-top: 5px solid #E31937;
     }
-    .feature-card::after {
+
+    .feature-card:hover {
+      transform: translateY(-15px);
+      box-shadow: 0 15px 40px rgba(0, 61, 165, 0.2);
+      border-top-color: #FFC220;
+    }
+
+    .feature-emoji {
+      font-size: 3.5rem;
+      margin-bottom: 15px;
+      transition: transform 0.3s ease;
+      display: inline-block;
+    }
+
+    .feature-card:hover .feature-emoji {
+      transform: scale(1.25) rotate(-8deg);
+    }
+
+    .feature-card h3 {
+      color: #003DA5;
+      font-size: 1.4rem;
+      font-weight: 900;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+
+    .feature-card p {
+      color: #555;
+      font-size: 1rem;
+      line-height: 1.6;
+      font-weight: 500;
+    }
+
+    /* ===== بطاقات المنتجات ===== */
+    .product-card {
+      background: white;
+      border-radius: 8px;
+      padding: 25px 20px;
+      text-align: center;
+      border: 3px solid #FFC220;
+      transition: all 0.4s ease;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .product-card::before {
       content: '';
       position: absolute;
-      bottom: 0; right: 0;
-      width: 100%; height: 4px;
-      background: linear-gradient(90deg, #10b981, #34d399);
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, #E31937, #2CAA4B);
       transform: scaleX(0);
-      transform-origin: right;
-      transition: transform 0.5s;
-    }
-    .feature-card:hover::after { transform: scaleX(1); }
-    .feature-card:hover { transform: translateY(-10px); }
-    .feature-card:hover .feature-emoji {
-      animation: bounceSpin 0.8s ease;
-    }
-    @keyframes bounceSpin {
-      0% { transform: scale(1); }
-      40% { transform: scale(1.4) rotate(15deg); }
-      70% { transform: scale(0.9) rotate(-10deg); }
-      100% { transform: scale(1); }
+      transform-origin: left;
+      transition: transform 0.5s ease;
     }
 
-    /* ===== شريط متحرك (Marquee) ===== */
-    .marquee-wrapper {
-      overflow: hidden;
-      white-space: nowrap;
+    .product-card:hover {
+      transform: translateY(-12px) scale(1.05);
+      box-shadow: 0 15px 40px rgba(0, 61, 165, 0.2);
+      border-color: #E31937;
     }
-    .marquee-track {
+
+    .product-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .product-emoji {
+      font-size: 2.8rem;
+      margin-bottom: 12px;
+      transition: transform 0.3s ease;
       display: inline-block;
-      animation: marquee 20s linear infinite;
-    }
-    .marquee-track span { margin: 0 32px; }
-    @keyframes marquee {
-      from { transform: translateX(0); }
-      to { transform: translateX(50%); }
     }
 
-    /* ===== بطاقات التقييم ===== */
-    .review-card {
-      transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s;
-      position: relative;
-    }
-    .review-card:hover {
-      transform: translateY(-10px) scale(1.03) rotate(-1deg);
-      box-shadow: 0 20px 45px rgba(16,185,129,0.2);
-    }
-    .stars span {
-      display: inline-block;
-      animation: starPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
-    }
-    .stars span:nth-child(2) { animation-delay: 0.1s; }
-    .stars span:nth-child(3) { animation-delay: 0.2s; }
-    .stars span:nth-child(4) { animation-delay: 0.3s; }
-    .stars span:nth-child(5) { animation-delay: 0.4s; }
-    @keyframes starPop {
-      from { transform: scale(0); }
-      to { transform: scale(1); }
+    .product-card:hover .product-emoji {
+      transform: scale(1.3) rotate(15deg);
     }
 
-    /* ===== أزرار متوهجة ===== */
-    .btn-glow {
+    .product-card h3 {
+      color: #003DA5;
+      font-size: 1.2rem;
+      font-weight: 900;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+
+    .product-card p {
+      color: #666;
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    /* ===== بطاقة التخفيف (ستايل سوبر ماركت) ===== */
+    .promo-badge {
+      background: linear-gradient(135deg, #E31937 0%, #FFC220 100%);
+      color: white;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+      margin-bottom: 60px;
+      box-shadow: 0 10px 30px rgba(227, 25, 55, 0.25);
+      font-weight: 900;
+      font-size: 1.3rem;
+      text-transform: uppercase;
+    }
+
+    /* ===== قسم الساعات ===== */
+    .hours-section {
+      background: linear-gradient(135deg, #003DA5 0%, #002E7F 100%);
+      border-radius: 8px;
+      padding: 50px 40px;
+      text-align: center;
+      color: white;
+      box-shadow: 0 12px 40px rgba(0, 61, 165, 0.3);
       position: relative;
       overflow: hidden;
-      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-      box-shadow: 0 10px 25px rgba(16,185,129,0.4);
-    }
-    .btn-glow:hover {
-      transform: translateY(-4px) scale(1.05);
-      box-shadow: 0 15px 40px rgba(16,185,129,0.6);
-    }
-    .btn-glow:active {
-      transform: translateY(-2px) scale(1.02);
     }
 
-    /* ===== بطاقات الاتصال ===== */
-    .contact-card {
-      transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    .hours-section::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(255, 194, 32, 0.15) 0%, transparent 70%);
+      border-radius: 50%;
     }
-    .contact-card:hover { transform: translateY(-8px) rotate(1deg); }
 
-    /* ===== ساعة رقمية نابضة ===== */
-    .clock-dot {
-      animation: blink 1.2s ease-in-out infinite;
+    .hours-content {
+      position: relative;
+      z-index: 2;
     }
-    @keyframes blink {
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255, 194, 32, 0.2);
+      border: 2px solid #FFC220;
+      color: #FFC220;
+      padding: 12px 25px;
+      border-radius: 50px;
+      margin-bottom: 20px;
+      font-weight: 900;
+      text-transform: uppercase;
+      font-size: 0.95rem;
+    }
+
+    .pulse-dot {
+      width: 12px;
+      height: 12px;
+      background: #FFC220;
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
       0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.3; transform: scale(0.8); }
+      50% { opacity: 0.5; transform: scale(1.2); }
     }
 
-    /* ===== عدّادات ===== */
-    .counter { display: inline-block; }
+    .hours-time {
+      font-size: 2.8rem;
+      font-weight: 900;
+      margin: 20px 0;
+      color: #FFC220;
+      text-transform: uppercase;
+    }
 
-    /* ===== شريط تمرير مخصص ===== */
-    ::-webkit-scrollbar { width: 8px; }
-    ::-webkit-scrollbar-track { background: rgba(16,185,129,0.08); }
-    ::-webkit-scrollbar-thumb { background: linear-gradient(#10b981, #059669); border-radius: 10px; }
+    /* ===== بطاقات التقييمات ===== */
+    .review-card {
+      background: white;
+      border-radius: 8px;
+      padding: 30px;
+      box-shadow: 0 6px 25px rgba(0, 61, 165, 0.1);
+      transition: all 0.4s ease;
+      border-left: 6px solid #2CAA4B;
+    }
 
-    .number-ltr { direction: ltr; unicode-bidi: bidi-override; display: inline-block; }
+    .review-card:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 15px 40px rgba(0, 61, 165, 0.2);
+      border-left-color: #E31937;
+    }
+
+    .stars {
+      color: #FFC220;
+      font-size: 1.3rem;
+      margin-bottom: 15px;
+      letter-spacing: 3px;
+    }
+
+    .review-text {
+      color: #555;
+      font-size: 1rem;
+      line-height: 1.7;
+      margin-bottom: 15px;
+      font-weight: 500;
+    }
+
+    .review-author {
+      color: #003DA5;
+      font-weight: 900;
+      font-size: 1.1rem;
+      text-transform: uppercase;
+    }
+
+    /* ===== قسم التواصل ===== */
+    .contact-wrapper {
+      background: white;
+      border-radius: 8px;
+      padding: 50px 40px;
+      margin-bottom: 60px;
+      box-shadow: 0 10px 35px rgba(0, 61, 165, 0.1);
+    }
+
+    .contact-card {
+      background: linear-gradient(135deg, #F5F5F5 0%, #FFFFFF 100%);
+      border-radius: 8px;
+      padding: 35px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+      transition: all 0.4s ease;
+      text-align: center;
+      border-top: 5px solid #2CAA4B;
+    }
+
+    .contact-card:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 15px 40px rgba(0, 61, 165, 0.15);
+      border-top-color: #E31937;
+    }
+
+    .contact-icon {
+      font-size: 3rem;
+      margin-bottom: 15px;
+      display: inline-block;
+    }
+
+    .contact-card h3 {
+      color: #003DA5;
+      font-size: 1.3rem;
+      font-weight: 900;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+
+    .contact-card p {
+      color: #666;
+      margin-bottom: 5px;
+      font-weight: 600;
+    }
+
+    /* ===== Footer ===== */
+    footer {
+      background: linear-gradient(90deg, #003DA5 0%, #002E7F 100%);
+      color: white;
+      text-align: center;
+      padding: 40px 20px;
+      margin-top: 60px;
+    }
+
+    footer p {
+      margin: 8px 0;
+      font-weight: 600;
+    }
 
     /* ===== استجابة الجوال ===== */
     @media (max-width: 768px) {
-      /* التنقل */
-      .glass-nav {
-        padding: 12px 16px !important;
+      .hero-title {
+        font-size: 2rem !important;
       }
 
-      /* العناوين */
-      h1 { font-size: 1.75rem !important; line-height: 2rem !important; }
-      h2 { font-size: 1.5rem !important; }
-      h3 { font-size: 1.1rem !important; }
+      .hero-emoji {
+        font-size: 4rem !important;
+      }
 
-      /* النصوص */
-      body { font-size: 0.95rem !important; }
-      .text-sm { font-size: 0.875rem !important; }
-      .text-lg { font-size: 1rem !important; }
-      
-      /* الأقسام */
-      section { padding: 32px 12px !important; }
-      .pt-36 { padding-top: 80px !important; }
-      .pb-16 { padding-bottom: 32px !important; }
-      .py-20 { padding: 32px 12px !important; }
+      .section-title {
+        font-size: 1.8rem !important;
+        margin-bottom: 40px !important;
+      }
 
-      /* الشبكات */
-      .md\:grid-cols-2, .md\:grid-cols-3 { grid-template-columns: 1fr !important; }
-      .gap-8 { gap: 16px !important; }
-      .gap-6 { gap: 12px !important; }
-
-      /* البطاقات */
-      .rounded-3xl { border-radius: 20px !important; }
-      .p-8 { padding: 16px !important; }
-      .p-6 { padding: 12px !important; }
-      .mb-6 { margin-bottom: 12px !important; }
-      .mb-4 { margin-bottom: 8px !important; }
-
-      /* الأيقونات */
-      .text-6xl { font-size: 2.5rem !important; }
-      .text-5xl { font-size: 1.75rem !important; }
-      .text-3xl { font-size: 1.5rem !important; }
-
-      /* الأزرار */
-      .btn-glow {
-        padding: 12px 16px !important;
+      .btn-primary, .btn-secondary {
         font-size: 0.95rem !important;
-      }
-      
-      button, a.block {
-        min-height: 44px !important;
-        font-size: 0.95rem !important;
+        padding: 12px 25px !important;
       }
 
-      /* الشريط المتحرك */
-      .marquee-track span { margin: 0 16px !important; font-size: 0.9rem !important; }
-
-      /* مسافات عامة */
-      .mx-auto { margin-left: auto; margin-right: auto; }
-      .max-w-6xl { max-width: 100% !important; }
-      .max-w-2xl { max-width: 100% !important; }
-
-      /* التقييمات */
-      .stars { font-size: 1.2rem; }
-
-      /* النص المتدرج */
-      .text-gradient-anim {
-        font-size: 1.5rem !important;
+      .feature-card, .product-card, .review-card, .contact-card {
+        padding: 20px 15px !important;
       }
 
-      /* الفجوات بين الشبكة */
-      .grid { gap: 12px !important; }
+      .hours-section {
+        padding: 30px 20px !important;
+      }
+
+      .hours-time {
+        font-size: 2rem !important;
+      }
+
+      .feature-emoji {
+        font-size: 2.5rem !important;
+      }
+
+      .product-emoji {
+        font-size: 2rem !important;
+      }
+
+      .contact-icon {
+        font-size: 2.5rem !important;
+      }
+
+      .navbar-brand {
+        font-size: 1.2rem !important;
+      }
+
+      section {
+        padding: 30px 15px !important;
+      }
     }
 
-    /* شاشات صغيرة جداً */
     @media (max-width: 480px) {
-      h1 { font-size: 1.5rem !important; }
-      h2 { font-size: 1.25rem !important; }
-      
-      section { padding: 24px 12px !important; }
-      
-      .p-8 { padding: 12px !important; }
-      .p-6 { padding: 10px !important; }
-      
-      .text-6xl { font-size: 2rem !important; }
-      
-      .glass-nav {
-        padding: 10px 12px !important;
-      }
-
-      .float-hero {
+      .hero-title {
         font-size: 1.5rem !important;
+        margin-bottom: 15px !important;
       }
 
-      .mb-16 { margin-bottom: 16px !important; }
+      .hero-subtitle {
+        font-size: 0.95rem !important;
+      }
 
-      button, a.block {
-        font-size: 0.9rem !important;
-        padding: 10px 12px !important;
+      .section-title {
+        font-size: 1.4rem !important;
+        margin-bottom: 30px !important;
+      }
+
+      .feature-card h3, .product-card h3 {
+        font-size: 1rem !important;
+      }
+
+      .hero-emoji {
+        font-size: 3.5rem !important;
+      }
+
+      .promo-badge {
+        font-size: 1.1rem !important;
+        padding: 15px !important;
       }
     }
   </style>
 </head>
 <body dir="rtl">
 
-  <!-- خلفية الجزيئات المتحركة -->
-  <canvas id="particles-canvas"></canvas>
-
-  <!-- شريط التنقل -->
-  <nav id="mainNav" class="glass-nav fixed top-0 w-full z-40">
-    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-      <div class="flex items-center gap-2 reveal">
-        <span class="text-3xl float-hero inline-block">🛒</span>
-        <span class="font-bold text-emerald-900 text-lg">أسواق المنظر</span>
+  <!-- ===== Navbar ===== -->
+  <nav class="navbar py-3 px-4">
+    <div class="max-w-6xl mx-auto flex items-center justify-between">
+      <div class="navbar-brand">
+        <span class="text-2xl">🛒</span>
+        <span>أسواق المنظر</span>
       </div>
-      <div class="flex gap-3 text-sm">
-      </div>
+      <div></div>
     </div>
   </nav>
 
-  <!-- ===== القسم الرئيسي ===== -->
-  <section class="pt-36 pb-16 px-4 relative z-10">
+  <!-- ===== Hero Section ===== -->
+  <section class="hero-section">
+    <div class="hero-content px-4">
+      <div class="hero-emoji">🛍️</div>
+      <h1 class="hero-title">كل ما تحتاج من هنا</h1>
+      <p class="hero-subtitle">منتجات طازة يومياً • أسعار منخفضة • توصيل سريع</p>
+      <div class="flex flex-col sm:flex-row gap-3 justify-center">
+        <a href="https://wa.me/966503080315?text=مرحبا%20أسواق%20المنظر" class="btn-primary">💬 اطلب الآن</a>
+        <a href="tel:0503080315" class="btn-secondary">☎️ اتصل بنا</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Promo Banner ===== -->
+  <section class="py-6 px-4">
     <div class="max-w-6xl mx-auto">
-      <div class="grid md:grid-cols-2 gap-10 items-center">
+      <div class="promo-badge">🎉 عروض حصرية وتخفيضات يومية لك 🎉</div>
+    </div>
+  </section>
 
-        <!-- النص -->
-        <div>
-          <h1 class="text-5xl md:text-6xl font-extrabold mb-6 text-emerald-900 leading-tight" style="perspective:800px;">
-            <span class="hero-word" style="animation-delay:.1s">كل</span>
-            <span class="hero-word" style="animation-delay:.2s">ما</span>
-            <span class="hero-word" style="animation-delay:.3s">تحتاج</span>
-            <br>
-            <span class="text-gradient-anim" style="animation-delay:.4s">من هنا</span>
-          </h1>
-          <p class="text-lg md:text-xl text-gray-600 mb-8 leading-relaxed">
-            أفضل المنتجات الطازة والأسعار التنافسية مع توصيل فوري في نفس اليوم. متجرك الموثوق للتسوق اليومي ✨
-          </p>
-          <div class="flex flex-col sm:flex-row gap-4">
-            <a href="https://wa.me/966503080315?text=%F0%9F%91%8B%20%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D8%A3%D8%B3%D9%88%D8%A7%D9%82%20%D8%A7%D9%84%D9%85%D9%86%D8%B8%D8%B1%0A%F0%9F%9B%92%20%D8%B9%D9%86%D8%AF%D9%8A%20%D8%B7%D9%84%D8%A8%20%D8%AC%D8%AF%D9%8A%D8%AF" target="_blank"
-               class="btn-glow bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-3 rounded-2xl font-bold text-center">
-              💬 اطلب الآن
-            </a>
-            <a href="tel:0503080315"
-               class="btn-glow bg-white hover:bg-gray-50 text-emerald-600 border-2 border-emerald-600 px-8 py-3 rounded-2xl font-bold text-center">
-              ☎️ اتصل بنا
-            </a>
-          </div>
+  <!-- ===== Features Section ===== -->
+  <section class="py-16 px-4 bg-white">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="section-title">لماذا تختار أسواق المنظر؟</h2>
+      <div class="grid md:grid-cols-3 gap-8 mt-16">
+        <div class="feature-card">
+          <div class="feature-emoji">⚡</div>
+          <h3>توصيل فوري</h3>
+          <p>توصيل سريع في نفس اليوم لجميع طلباتك</p>
         </div>
-
-        <!-- صورة جانبية -->
-        <div class="hidden md:flex justify-center items-center">
-          <div class="relative">
-            <div class="pulse-ring w-64 h-64 rounded-full bg-gradient-to-br from-emerald-100 to-emerald-50 flex items-center justify-center">
-              <span class="text-8xl float-hero">🛍️</span>
-            </div>
-          </div>
+        <div class="feature-card">
+          <div class="feature-emoji">🥬</div>
+          <h3>منتجات طازة</h3>
+          <p>أفضل المنتجات من مصادر موثوقة وموثوقين</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-emoji">💰</div>
+          <h3>أسعار منخفضة</h3>
+          <p>أرخص الأسعار مع عروض أسبوعية حصرية</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- شريط متحرك -->
-  <div class="marquee-wrapper bg-emerald-600 text-white py-3 font-bold relative z-10">
-    <div class="marquee-track" id="marquee">
-      <span>🥬 خضراوات طازة يومياً</span>
-      <span>🚚 توصيل فوري</span>
-      <span>💰 أسعار تنافسية</span>
-      <span>⭐ جودة مضمونة</span>
-      <span>📞 خدمة 24/7</span>
-    </div>
-  </div>
-
-  <!-- ===== المميزات ===== -->
-  <section id="features" class="py-20 px-4 relative z-10">
+  <!-- ===== Products Section ===== -->
+  <section class="py-16 px-4 bg-gray-100">
     <div class="max-w-6xl mx-auto">
-      <h2 class="reveal text-4xl font-bold text-emerald-900 text-center mb-16">لماذا تختار أسواق المنظر؟</h2>
-      <div class="grid md:grid-cols-3 gap-6 md:gap-8">
-
-        <div class="reveal feature-card p-8 rounded-3xl bg-white/70 backdrop-blur border border-emerald-100 shadow-lg">
-          <div class="feature-emoji text-6xl mb-4 inline-block">⚡</div>
-          <h3 class="text-2xl font-bold text-emerald-900 mb-3">توصيل سريع</h3>
-          <p class="text-gray-600">توصيل فوري في نفس اليوم لجميع طلباتك بكل أمان</p>
+      <h2 class="section-title">منتجاتنا</h2>
+      <div class="grid md:grid-cols-4 gap-5 mt-16">
+        <div class="product-card">
+          <div class="product-emoji">🥬</div>
+          <h3>الخضراوات</h3>
+          <p>طازة يومياً</p>
         </div>
-
-        <div class="reveal feature-card p-8 rounded-3xl bg-white/70 backdrop-blur border border-emerald-100 shadow-lg" style="transition-delay:.15s">
-          <div class="feature-emoji text-6xl mb-4 inline-block">🌟</div>
-          <h3 class="text-2xl font-bold text-emerald-900 mb-3">منتجات طازة</h3>
-          <p class="text-gray-600">نختار أفضل المنتجات الطازة لك مباشرة من المصادر الموثوقة</p>
+        <div class="product-card">
+          <div class="product-emoji">🍎</div>
+          <h3>الفواكه</h3>
+          <p>موسمية وطازة</p>
         </div>
-
-        <div class="reveal feature-card p-8 rounded-3xl bg-white/70 backdrop-blur border border-emerald-100 shadow-lg" style="transition-delay:.3s">
-          <div class="feature-emoji text-6xl mb-4 inline-block">💰</div>
-          <h3 class="text-2xl font-bold text-emerald-900 mb-3">أسعار تنافسية</h3>
-          <p class="text-gray-600">أفضل الأسعار في السوق مع عروض حصرية أسبوعية</p>
+        <div class="product-card">
+          <div class="product-emoji">🥛</div>
+          <h3>الألبان</h3>
+          <p>منتجات صحية</p>
+        </div>
+        <div class="product-card">
+          <div class="product-emoji">🍞</div>
+          <h3>المخبوزات</h3>
+          <p>من الفرن يومياً</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== المنتجات ===== -->
-  <section id="products" class="py-20 px-4 relative z-10">
-    <div class="max-w-6xl mx-auto">
-      <h2 class="reveal text-4xl font-bold text-emerald-900 text-center mb-16">منتجاتنا المميزة</h2>
-      <div class="grid md:grid-cols-4 gap-6">
-
-        <div class="reveal product-card rounded-3xl bg-white p-6 border border-emerald-100 shadow cursor-pointer text-center">
-          <div class="emoji text-6xl mb-4">🥬</div>
-          <h3 class="font-bold text-emerald-900 text-lg mb-1">الخضراوات</h3>
-          <p class="text-gray-500 text-sm">طازة كل يوم</p>
-        </div>
-
-        <div class="reveal product-card rounded-3xl bg-white p-6 border border-emerald-100 shadow cursor-pointer text-center" style="transition-delay:.1s">
-          <div class="emoji text-6xl mb-4">🍎</div>
-          <h3 class="font-bold text-emerald-900 text-lg mb-1">الفواكه</h3>
-          <p class="text-gray-500 text-sm">فواكه موسمية</p>
-        </div>
-
-        <div class="reveal product-card rounded-3xl bg-white p-6 border border-emerald-100 shadow cursor-pointer text-center" style="transition-delay:.2s">
-          <div class="emoji text-6xl mb-4">🥛</div>
-          <h3 class="font-bold text-emerald-900 text-lg mb-1">الألبان</h3>
-          <p class="text-gray-500 text-sm">منتجات صحية</p>
-        </div>
-
-        <div class="reveal product-card rounded-3xl bg-white p-6 border border-emerald-100 shadow cursor-pointer text-center" style="transition-delay:.3s">
-          <div class="emoji text-6xl mb-4">🍞</div>
-          <h3 class="font-bold text-emerald-900 text-lg mb-1">المخبوزات</h3>
-          <p class="text-gray-500 text-sm">طازة كل يوم</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== ساعات العمل ===== -->
-  <section class="py-20 px-4 relative z-10">
-    <div class="max-w-6xl mx-auto">
-      <h2 class="reveal text-4xl font-bold text-emerald-900 text-center mb-16">ساعات العمل</h2>
-      <div class="max-w-2xl mx-auto">
-        <div class="reveal reveal-flip p-10 rounded-3xl bg-gradient-to-br from-emerald-600 to-emerald-800 text-white text-center shadow-2xl">
-          <p class="text-lg font-bold mb-3 flex items-center justify-center gap-2">
-            <span class="clock-dot inline-block w-3 h-3 rounded-full bg-emerald-300"></span>
-            مفتوح الآن — طوال الأسبوع
-          </p>
-          <p class="text-emerald-100 mb-3">السبت - الجمعة</p>
-          <p class="text-4xl font-extrabold text-emerald-200" style="direction:ltr;">6:30 AM - 12:30 AM</p>
-          <p class="text-sm text-emerald-200 mt-4">متاح كل يوم للخدمتك ✨</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== آراء العملاء ===== -->
-  <section class="py-20 px-4 relative z-10">
-    <div class="max-w-6xl mx-auto">
-      <h2 class="reveal text-4xl font-bold text-emerald-900 text-center mb-16">آراء عملائنا</h2>
-      <div class="grid md:grid-cols-3 gap-6 md:gap-8">
-
-        <div class="reveal review-card p-8 rounded-3xl bg-white border-r-4 border-emerald-500 shadow-lg">
-          <div class="stars flex gap-1 mb-4 text-xl">
-            <span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span>
-          </div>
-          <p class="text-gray-600 mb-4">"منتجات طازة وخدمة ممتازة جداً، أنا من أوفى الزبائن"</p>
-          <p class="font-bold text-emerald-900">أم سارة</p>
-        </div>
-
-        <div class="reveal review-card p-8 rounded-3xl bg-white border-r-4 border-emerald-500 shadow-lg" style="transition-delay:.15s">
-          <div class="stars flex gap-1 mb-4 text-xl">
-            <span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span>
-          </div>
-          <p class="text-gray-600 mb-4">"الأسعار رائعة والتوصيل سريع جداً. موصى به!"</p>
-          <p class="font-bold text-emerald-900">محمد</p>
-        </div>
-
-        <div class="reveal review-card p-8 rounded-3xl bg-white border-r-4 border-emerald-500 shadow-lg" style="transition-delay:.3s">
-          <div class="stars flex gap-1 mb-4 text-xl">
-            <span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span>
-          </div>
-          <p class="text-gray-600 mb-4">"افضل متجر"</p>
-          <p class="font-bold text-emerald-900">أم محمود</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== التواصل ===== -->
-  <section id="contact-section" class="py-20 px-4 relative z-10">
+  <!-- ===== Hours Section ===== -->
+  <section class="py-16 px-4">
     <div class="max-w-2xl mx-auto">
-      <h2 class="reveal text-4xl font-bold text-emerald-900 text-center mb-12">تواصل معنا</h2>
-
-      <div class="grid md:grid-cols-2 gap-6 mb-6">
-        <div class="reveal contact-card bg-white rounded-3xl p-8 shadow-xl border border-emerald-100">
-          <div class="flex items-center gap-3 mb-4">
-            <span class="text-3xl">📍</span>
-            <h3 class="text-xl font-bold text-emerald-900">موقعنا</h3>
+      <div class="hours-section">
+        <div class="hours-content">
+          <div class="status-badge">
+            <span class="pulse-dot"></span>
+            مفتوح الآن
           </div>
-          <p class="text-gray-600 mb-6">ثلوث المنظر</p>
-          <a href="https://maps.app.goo.gl/TYAYNCC6JaU3nHkMA" target="_blank"
-             class="btn-glow block w-full bg-emerald-600 hover:bg-emerald-700 text-white py-3 rounded-2xl font-bold text-center">
-            <span>🗺️ افتح الخريطة</span>
-          </a>
+          <h2 class="text-2xl font-bold mb-4">ساعات العمل</h2>
+          <p class="text-lg mb-2 font-bold">السبت - الجمعة</p>
+          <div class="hours-time" style="direction: ltr;">6:30 AM - 12:30 AM</div>
+          <p class="text-lg opacity-90 font-bold mt-6">✨ متاح كل يوم لخدمتك ✨</p>
         </div>
-
-        <div class="reveal contact-card bg-white rounded-3xl p-8 shadow-xl border border-emerald-100" style="transition-delay:.15s">
-          <div class="flex items-center gap-3 mb-4">
-            <span class="text-3xl">📞</span>
-            <h3 class="text-xl font-bold text-emerald-900">اتصل بنا</h3>
-          </div>
-          <p class="text-gray-600 mb-1 text-lg font-bold"><span class="number-ltr">050 308 0315</span></p>
-          <p class="text-gray-500 text-sm mb-6">متاح 24/7</p>
-          <a href="tel:0503080315"
-             class="btn-glow block w-full bg-emerald-600 hover:bg-emerald-700 text-white py-3 rounded-2xl font-bold text-center">
-            <span>☎️ اتصل الآن</span>
-          </a>
-        </div>
-      </div>
-
-      <div class="reveal bg-white rounded-3xl p-8 shadow-xl border border-emerald-100" style="transition-delay:.3s">
-        <div class="flex items-center gap-3 mb-4">
-          <span class="text-3xl">💬</span>
-          <h3 class="text-xl font-bold text-emerald-900">اطلب عبر WhatsApp</h3>
-        </div>
-        <p class="text-gray-600 mb-6">اطلب منتجاتك الآن وسنصلك بسرعة</p>
-        <a href="https://wa.me/966503080315?text=%F0%9F%91%8B%20%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D8%A3%D8%B3%D9%88%D8%A7%D9%82%20%D8%A7%D9%84%D9%85%D9%86%D8%B8%D8%B1%0A%F0%9F%9B%92%20%D8%B9%D9%86%D8%AF%D9%8A%20%D8%B7%D9%84%D8%A8%20%D8%AC%D8%AF%D9%8A%D8%AF" target="_blank"
-           class="btn-glow block w-full bg-green-500 hover:bg-green-600 text-white py-4 rounded-2xl font-extrabold text-lg text-center">
-          <span>💬 افتح WhatsApp</span>
-        </a>
       </div>
     </div>
   </section>
 
-  <!-- الفوتر -->
-  <footer class="bg-emerald-900 text-emerald-100 py-12 px-4 relative z-10">
-    <div class="max-w-6xl mx-auto text-center">
-      <p class="mb-2">© <span id="year">2026</span> أسواق المنظر | جميع الحقوق محفوظة</p>
-      <p class="text-sm text-emerald-200">متجرك الموثوق للتسوق اليومي ✨</p>
+  <!-- ===== Reviews Section ===== -->
+  <section class="py-16 px-4 bg-white">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="section-title">آراء عملائنا</h2>
+      <div class="grid md:grid-cols-3 gap-6 mt-16">
+        <div class="review-card">
+          <div class="stars">⭐⭐⭐⭐⭐</div>
+          <p class="review-text">"منتجات طازة وخدمة عملاء ممتازة جداً، أنا من أوفى الزبائن"</p>
+          <p class="review-author">أم سارة</p>
+        </div>
+        <div class="review-card">
+          <div class="stars">⭐⭐⭐⭐⭐</div>
+          <p class="review-text">"الأسعار رائعة والتوصيل سريع جداً جداً. موصى به!"</p>
+          <p class="review-author">محمد</p>
+        </div>
+        <div class="review-card">
+          <div class="stars">⭐⭐⭐⭐⭐</div>
+          <p class="review-text">"أفضل متجر في المنطقة، خدمة رائعة جداً وسعيد بالتعامل"</p>
+          <p class="review-author">أم محمود</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Contact Section ===== -->
+  <section class="py-16 px-4 bg-gray-100">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="section-title">تواصل معنا الآن</h2>
+      <div class="contact-wrapper">
+        <div class="grid md:grid-cols-3 gap-6 mt-6">
+          <div class="contact-card">
+            <div class="contact-icon">📍</div>
+            <h3>موقعنا</h3>
+            <p>ثلوث المنظر</p>
+            <p style="color: #999; font-size: 0.85rem; margin-top: 10px;">شرق المدينة</p>
+            <a href="https://maps.app.goo.gl/TYAYNCC6JaU3nHkMA" target="_blank" class="btn-primary mt-4 inline-block" style="font-size: 0.9rem; padding: 10px 20px;">🗺️ الخريطة</a>
+          </div>
+          <div class="contact-card">
+            <div class="contact-icon">📞</div>
+            <h3>اتصل بنا</h3>
+            <p style="font-size: 1.2rem; color: #E31937; margin-top: 5px;">050 308 0315</p>
+            <p style="color: #999; font-size: 0.85rem;">متاح 24/7</p>
+            <a href="tel:0503080315" class="btn-primary mt-4 inline-block" style="font-size: 0.9rem; padding: 10px 20px;">☎️ اتصل</a>
+          </div>
+          <div class="contact-card">
+            <div class="contact-icon">💬</div>
+            <h3>واتساب</h3>
+            <p>اطلب منتجاتك الآن</p>
+            <p style="color: #999; font-size: 0.85rem; margin-top: 5px;">سنصلك بسرعة</p>
+            <a href="https://wa.me/966503080315?text=مرحبا%20أسواق%20المنظر" target="_blank" class="btn-primary mt-4 inline-block" style="background: linear-gradient(135deg, #25D366 0%, #20BA63 100%); font-size: 0.9rem; padding: 10px 20px;">💬 واتس</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Footer ===== -->
+  <footer>
+    <div class="max-w-6xl mx-auto">
+      <p>© 2026 أسواق المنظر | جميع الحقوق محفوظة</p>
+      <p style="font-size: 0.9rem; opacity: 0.8;">متجرك الموثوق للتسوق الذكي ✨</p>
     </div>
   </footer>
 
   <script>
-    // ============ خلفية الجزيئات المتحركة ============
-    (function () {
-      const canvas = document.getElementById('particles-canvas');
-      const ctx = canvas.getContext('2d');
-      let particles = [];
-
-      function resize() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-      }
-      resize();
-      window.addEventListener('resize', resize);
-
-      for (let i = 0; i < 40; i++) {
-        particles.push({
-          x: Math.random() * canvas.width,
-          y: Math.random() * canvas.height,
-          r: Math.random() * 3 + 1,
-          vx: (Math.random() - 0.5) * 0.5,
-          vy: (Math.random() - 0.5) * 0.5,
-          opacity: Math.random() * 0.3 + 0.1
-        });
-      }
-
-      function draw() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        particles.forEach(p => {
-          p.x += p.vx; p.y += p.vy;
-          if (p.x < 0) p.x = canvas.width;
-          if (p.x > canvas.width) p.x = 0;
-          if (p.y < 0) p.y = canvas.height;
-          if (p.y > canvas.height) p.y = 0;
-
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(16, 185, 129, ${p.opacity})`;
-          ctx.fill();
-        });
-        requestAnimationFrame(draw);
-      }
-      draw();
-    })();
-
-    // ============ ظهور العناصر عند التمرير ============
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('active');
-          entry.target.querySelectorAll('.counter').forEach(startCounter);
-          if (entry.target.classList.contains('counter')) startCounter(entry.target);
-        }
-      });
-    }, { threshold: 0.15 });
-
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-    // ============ العدّادات ============
-    function startCounter(el) {
-      if (el.dataset.done) return;
-      el.dataset.done = true;
-      const target = +el.dataset.target;
-      const duration = 1800;
-      const start = performance.now();
-      function tick(now) {
-        const p = Math.min((now - start) / duration, 1);
-        const eased = 1 - Math.pow(1 - p, 3);
-        el.textContent = Math.floor(eased * target) + '+';
-        if (p < 1) requestAnimationFrame(tick);
-      }
-      requestAnimationFrame(tick);
-    }
-
-    // ============ شريط التنقل عند التمرير ============
-    const nav = document.getElementById('mainNav');
+    // Navbar scroll effect
+    const navbar = document.querySelector('.navbar');
     window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 40);
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
     });
-
-    // ============ تكرار شريط Marquee ============
-    const marquee = document.getElementById('marquee');
-    marquee.innerHTML += marquee.innerHTML;
-
-    // ============ السنة الحالية ============
-    document.getElementById('year').textContent = new Date().getFullYear();
   </script>
+
 </body>
 </html>
