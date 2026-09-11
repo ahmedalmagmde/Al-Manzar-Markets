@@ -50,7 +50,7 @@
 
     /* ===== Hero Section ===== */
     .hero-section {
-      background: linear-gradient(135deg, #003DA5 0%, #E31937 50%, #FFC220 100%);
+      background: #003DA5;
       position: relative;
       overflow: hidden;
       min-height: 550px;
@@ -60,33 +60,16 @@
       color: white;
     }
 
-    .hero-section::before {
-      content: '';
+    /* إعدادات خلفية الفيديو */
+    .hero-video {
       position: absolute;
-      top: -40%;
-      right: -10%;
-      width: 600px;
-      height: 600px;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 50%;
-      animation: float 8s ease-in-out infinite;
-    }
-
-    .hero-section::after {
-      content: '';
-      position: absolute;
-      bottom: -30%;
-      left: -15%;
-      width: 500px;
-      height: 500px;
-      background: rgba(255, 255, 255, 0.08);
-      border-radius: 50%;
-      animation: float 10s ease-in-out infinite reverse;
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-40px); }
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 1;
+      opacity: 0.4;
     }
 
     .hero-content {
@@ -108,23 +91,11 @@
       }
     }
 
-    .hero-emoji {
-      font-size: 6rem;
-      animation: bounce 2.5s ease-in-out infinite;
-      margin-bottom: 20px;
-      display: inline-block;
-    }
-
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0) scale(1); }
-      50% { transform: translateY(-40px) scale(1.1); }
-    }
-
     .hero-title {
       font-size: 3.5rem;
       font-weight: 900;
       margin-bottom: 20px;
-      text-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+      text-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
       line-height: 1.2;
     }
 
@@ -134,6 +105,7 @@
       opacity: 0.98;
       line-height: 1.8;
       font-weight: 500;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
     }
 
     /* ===== أزرار ===== */
@@ -181,6 +153,7 @@
       background: #003DA5;
       color: white;
       transform: translateY(-4px);
+      border-color: transparent;
     }
 
     /* ===== الأقسام ===== */
@@ -313,7 +286,7 @@
       font-weight: 600;
     }
 
-    /* ===== بطاقة التخفيف (ستايل سوبر ماركت) ===== */
+    /* ===== بطاقة التخفيف ===== */
     .promo-badge {
       background: linear-gradient(135deg, #E31937 0%, #FFC220 100%);
       color: white;
@@ -493,49 +466,26 @@
       .hero-title {
         font-size: 2rem !important;
       }
-
-      .hero-emoji {
-        font-size: 4rem !important;
-      }
-
       .section-title {
         font-size: 1.8rem !important;
         margin-bottom: 40px !important;
       }
-
       .btn-primary, .btn-secondary {
         font-size: 0.95rem !important;
         padding: 12px 25px !important;
       }
-
       .feature-card, .product-card, .review-card, .contact-card {
         padding: 20px 15px !important;
       }
-
       .hours-section {
         padding: 30px 20px !important;
       }
-
       .hours-time {
         font-size: 2rem !important;
       }
-
-      .feature-emoji {
-        font-size: 2.5rem !important;
-      }
-
-      .product-emoji {
-        font-size: 2rem !important;
-      }
-
-      .contact-icon {
-        font-size: 2.5rem !important;
-      }
-
       .navbar-brand {
         font-size: 1.2rem !important;
       }
-
       section {
         padding: 30px 15px !important;
       }
@@ -546,24 +496,13 @@
         font-size: 1.5rem !important;
         margin-bottom: 15px !important;
       }
-
       .hero-subtitle {
         font-size: 0.95rem !important;
       }
-
       .section-title {
         font-size: 1.4rem !important;
         margin-bottom: 30px !important;
       }
-
-      .feature-card h3, .product-card h3 {
-        font-size: 1rem !important;
-      }
-
-      .hero-emoji {
-        font-size: 3.5rem !important;
-      }
-
       .promo-badge {
         font-size: 1.1rem !important;
         padding: 15px !important;
@@ -586,12 +525,15 @@
 
   <!-- ===== Hero Section ===== -->
   <section class="hero-section">
+    <video autoplay loop muted playsinline class="hero-video">
+      <source src="12655226_3834_2160_30fps.mp4" type="video/mp4">
+    </video>
+    
     <div class="hero-content px-4">
-      <div class="hero-emoji">🛍️</div>
       <h1 class="hero-title">كل ما تحتاج من هنا</h1>
       <p class="hero-subtitle">منتجات طازة يومياً • أسعار منخفضة • توصيل سريع</p>
       <div class="flex flex-col sm:flex-row gap-3 justify-center">
-        <a href="https://wa.me/966503080315?text=%F0%9F%91%8B%20%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D8%A8%D8%A3%D8%B3%D9%88%D8%A7%D9%82%20%D8%A7%D9%84%D9%85%D9%86%D8%B8%D8%B1%20%F0%9F%9B%92%0A%0A%F0%9F%98%8A%20%D8%A7%D9%84%D8%AD%D9%85%D8%AF%20%D9%84%D9%84%D9%87%20%D8%B9%D9%84%D9%89%20%D8%A7%D8%AE%D8%AA%D9%8A%D8%A7%D8%B1%D9%83%D9%85%20%D9%84%D9%86%D8%A7%0A%0A%F0%9F%92%9A%20%D8%B9%D9%86%D8%AF%D9%8A%20%D8%B7%D9%84%D8%A8%20%D8%AC%D8%AF%D9%8A%D8%AF%0A%0A%F0%9F%8F%AA%20%D8%AE%D8%B6%D8%B1%D8%A7%D9%88%D8%A7%D8%AA%20%F0%9F%A5%AC%20%7C%20%D9%81%D9%88%D8%A7%D9%83%D8%A9%20%F0%9F%8D%8E%20%7C%20%D8%A7%D9%84%D8%A8%D8%A7%D9%86%20%F0%9F%A5%9B%20%7C%20%D8%AE%D8%A8%D8%B2%20%F0%9F%8D%9E" class="btn-primary">💬 اطلب الآن</a>
+        <a href="https://wa.me/966503080315?text=👋%20مرحباً%20أسواق%20المنظر%0A🛒%20عندي%20طلب%20جديد" class="btn-primary">💬 اطلب الآن</a>
         <a href="tel:0503080315" class="btn-secondary">☎️ اتصل بنا</a>
       </div>
     </div>
@@ -724,7 +666,7 @@
             <h3>واتساب</h3>
             <p>اطلب منتجاتك الآن</p>
             <p style="color: #999; font-size: 0.85rem; margin-top: 5px;">سنصلك بسرعة</p>
-            <a href="https://wa.me/966503080315?text=%F0%9F%91%8B%20%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20%D8%A8%D8%A3%D8%B3%D9%88%D8%A7%D9%82%20%D8%A7%D9%84%D9%85%D9%86%D8%B8%D8%B1%20%F0%9F%9B%92%0A%0A%F0%9F%98%8A%20%D8%A7%D9%84%D8%AD%D9%85%D8%AF%20%D9%84%D9%84%D9%87%20%D8%B9%D9%84%D9%89%20%D8%A7%D8%AE%D8%AA%D9%8A%D8%A7%D8%B1%D9%83%D9%85%20%D9%84%D9%86%D8%A7%0A%0A%F0%9F%92%9A%20%D8%B9%D9%86%D8%AF%D9%8A%20%D8%B7%D9%84%D8%A8%20%D8%AC%D8%AF%D9%8A%D8%AF%0A%0A%F0%9F%8F%AA%20%D8%AE%D8%B6%D8%B1%D8%A7%D9%88%D8%A7%D8%AA%20%F0%9F%A5%AC%20%7C%20%D9%81%D9%88%D8%A7%D9%83%D8%A9%20%F0%9F%8D%8E%20%7C%20%D8%A7%D9%84%D8%A8%D8%A7%D9%86%20%F0%9F%A5%9B%20%7C%20%D8%AE%D8%A8%D8%B2%20%F0%9F%8D%9E" target="_blank" class="btn-primary mt-4 inline-block" style="background: linear-gradient(135deg, #25D366 0%, #20BA63 100%); font-size: 0.9rem; padding: 10px 20px;">💬 واتس</a>
+            <a href="https://wa.me/966503080315?text=👋%20مرحباً%20أسواق%20المنظر%0A🛒%20عندي%20طلب%20جديد" target="_blank" class="btn-primary mt-4 inline-block" style="background: linear-gradient(135deg, #25D366 0%, #20BA63 100%); font-size: 0.9rem; padding: 10px 20px;">💬 واتس</a>
           </div>
         </div>
       </div>
@@ -740,6 +682,12 @@
   </footer>
 
   <script>
+    // ===== كود العودة لأعلى الصفحة عند التحديث =====
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+
     // Navbar scroll effect
     const navbar = document.querySelector('.navbar');
     window.addEventListener('scroll', () => {
